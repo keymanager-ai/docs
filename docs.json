@@ -1,97 +1,152 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "almond",
-  "name": "Product Guide",
-  "description": "Step-by-step guides for every product—platform setup, analytics, and integrations in one place.",
+  "theme": "mint",
+  "name": "KryptoVault",
   "colors": {
-    "primary": "#166E3F",
-    "light": "#26BD6C",
-    "dark": "#166E3F"
+    "primary": "#501B9A",
+    "light": "#7C3AED",
+    "dark": "#3A1370"
   },
   "favicon": "/favicon.ico",
-  "icons": {
-    "library": "lucide"
-  },
-  "styling": {
-    "eyebrows": "breadcrumbs"
-  },
-  "contextual": {
-    "options": ["copy", "view", "assistant", "mcp", "add-mcp"]
-  },
-  "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Home",
-          "icon": "house",
-          "href": "/"
-        },
-        {
-          "anchor": "Changelog",
-          "icon": "scroll-text",
-          "href": "https://www.mintlify.com/docs/changelog"
-        },
-        {
-          "anchor": "Help",
-          "icon": "life-buoy",
-          "href": "https://www.mintlify.com/docs/contact-support"
-        }
-      ]
-    },
-    "directory": "card",
-    "groups": [
-      {
-        "group": "Platform",
-        "icon": "layers",
-        "expanded": true,
-        "pages": [
-          "platform/quickstart",
-          "platform/key-concepts",
-          "platform/configuration/settings",
-          "platform/configuration/user-management",
-          "platform/administration/roles-permissions"
-        ]
-      },
-      {
-        "group": "Analytics",
-        "icon": "chart-bar",
-        "expanded": true,
-        "pages": [
-          "analytics/quickstart",
-          "analytics/connect-data",
-          "analytics/dashboards/create-dashboard",
-          "analytics/reports/scheduled-reports"
-        ]
-      },
-      {
-        "group": "Integrations",
-        "icon": "plug",
-        "expanded": true,
-        "pages": [
-          "integrations/quickstart",
-          "integrations/authentication",
-          "integrations/connectors/crm",
-          "integrations/webhooks/configure"
-        ]
-      }
-    ]
-  },
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "get-started/what-is-kryptovault",
+              "get-started/core-concepts",
+              "get-started/architecture",
+              "get-started/quickstart"
+            ]
+          },
+          {
+            "group": "Platform Concepts",
+            "pages": [
+              "platform/tenancy-namespaces",
+              "platform/encryption-key-hierarchy",
+              "platform/gateway-model",
+              "platform/identities-certs-secrets"
+            ]
+          },
+          {
+            "group": "Certificate Management",
+            "pages": [
+              "certificates/overview",
+              "certificates/discovery",
+              "certificates/inventory-private-keys",
+              "certificates/issuers-remote-ca",
+              "certificates/certificate-stores",
+              "certificates/csr-issuance",
+              "certificates/self-service"
+            ]
+          },
+          {
+            "group": "Secrets Management (Key Vault)",
+            "pages": [
+              "secrets/overview",
+              "secrets/vaults",
+              "secrets/secrets",
+              "secrets/protection-keys-encryption",
+              "secrets/vault-access-control"
+            ]
+          },
+          {
+            "group": "Access Management",
+            "pages": [
+              "access/users",
+              "access/roles-permissions",
+              "access/password-policy",
+              "access/mfa",
+              "access/session-management",
+              "access/sso",
+              "access/service-accounts"
+            ]
+          },
+          {
+            "group": "Non-Human Identity",
+            "pages": [
+              "nhi/overview"
+            ]
+          },
+          {
+            "group": "System & Administration",
+            "pages": [
+              "system/notifications",
+              "system/events-audit",
+              "system/remote-forwarding",
+              "system/gateways",
+              "system/recycle-bin",
+              "system/diagnostics"
+            ]
+          },
+          {
+            "group": "Security & Trust",
+            "pages": [
+              "security/security-model",
+              "security/encryption",
+              "security/audit-compliance",
+              "security/data-residency",
+              "security/hardening"
+            ]
+          },
+          {
+            "group": "Deployment",
+            "pages": [
+              "deployment/saas-vs-self-hosted",
+              "deployment/saas",
+              "deployment/self-hosted",
+              "deployment/reference-deployments",
+              "deployment/config-parameters"
+            ]
+          },
+          {
+            "group": "How-To Guides",
+            "pages": [
+              "guides/overview"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Reference",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Changelog",
+            "pages": [
+              "changelog"
+            ]
+          }
+        ]
+      }
+    ]
   },
   "navbar": {
     "links": [],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get Started",
+      "href": "/get-started/quickstart"
     }
   },
   "footer": {
-    "socials": {
-      "x": "https://x.com/yourcompany",
-      "linkedin": "https://linkedin.com/company/yourcompany"
-    }
+    "socials": {}
   }
 }
