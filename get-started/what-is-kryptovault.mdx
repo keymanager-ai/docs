@@ -1,8 +1,62 @@
 ---
 title: "What is KryptoVault"
-description: "Certificates, Secrets, and (coming) Non-Human Identity in one platform."
+description: "A unified platform to discover, issue, and manage the full lifecycle of your certificates and secrets — with the security controls a credential store demands."
 ---
 
-<Note>
-This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault is a lifecycle and security management platform for the machine credentials that hold your infrastructure together: **TLS/PKI certificates** and **secrets** (API keys, tokens, passwords, SSH and encryption keys). It gives you one place to find every credential, govern who and what can use it, and act before anything expires or leaks.
+
+## The problem it solves
+
+Certificates and secrets sprawl across servers, load balancers, pipelines, and cloud accounts. They're issued by different teams, stored in different places, and forgotten until something breaks — an expired cert takes down a service, or a leaked key becomes an incident. KryptoVault replaces that sprawl with a single inventory, a consistent set of controls, and automation around the parts that fail silently.
+
+## The platform
+
+KryptoVault is organized into two live modules and a shared platform layer, with a third module planned.
+
+<CardGroup cols={2}>
+  <Card title="Certificate Management (CLM)" icon="certificate" href="/certificates/overview">
+    Discover certificates across your network, build a single inventory, issue and renew through your CAs, and track every certificate through its lifecycle.
+  </Card>
+
+  <Card title="Secrets Management (Key Vault)" icon="key" href="/secrets/overview">
+    Store secrets in access-controlled vaults, versioned and typed, encrypted under protection keys you choose — local, AWS KMS, or HashiCorp Vault Transit.
+  </Card>
+</CardGroup>
+
+<Card title="Non-Human Identity (NHI)" icon="robot" href="/nhi/overview">
+  Planned. Lifecycle and risk management for non-human identities. Not yet available — see the roadmap placeholder.
+</Card>
+
+### What runs across both modules
+
+- **Access Management** — users, role-based access control, MFA, SSO (LDAP, Microsoft Entra, Google), session policy, and password policy. [Service accounts](/access/service-accounts) issue machine credentials for calling the KryptoVault API.
+- **Events & audit** — every meaningful action raises an event with a type and severity, queryable as an audit trail and [forwardable](/system/remote-forwarding) to webhook, syslog, or Azure Queue.
+- **Notifications, Gateways, Recycle Bin, Diagnostics** — email and policy-based alerts, connectivity to on-prem CAs and infrastructure, soft-delete with retention, and system health.
+
+## Certificate lifecycle, end to end
+
+KryptoVault tracks each certificate through a defined lifecycle — **Discovered, Generated, Enrolled, Renewal, Expired, Revocation** — so inventory state always reflects reality, whether a certificate was found by a network scan or issued through the platform.
+
+## Secrets, built for a credential store
+
+Secrets live in [vaults](/secrets/vaults) and are **versioned**, **typed** (token, API key, password, encryption key, SSH key, generic, OAuth), and **environment-scoped** (dev through production). Each vault binds to a [protection key](/secrets/protection-keys-encryption) at creation and enforces its own [network and user access controls](/secrets/vault-access-control).
+
+## Deployment
+
+KryptoVault runs as a fully containerized, stateless application — every component (API, UI, workers) holds no local state, with all state in MongoDB and Redis. Run it as a managed [SaaS](/deployment/saas) or [self-hosted](/deployment/self-hosted) in your own environment, with or without an orchestrator.
+
+## Next steps
+
+<CardGroup cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/get-started/quickstart">
+    Issue your first certificate and create your first vault and secret.
+  </Card>
+
+  <Card title="Core concepts" icon="book" href="/get-started/core-concepts">
+    The vocabulary: identities, vaults, protection keys, issuers, gateways, events.
+  </Card>
+
+  <Card title="Architecture" icon="sitemap" href="/get-started/architecture">
+    How the API, workers, MongoDB, Redis, and gateways fit together.
+  </Card>
+</CardGroup>
