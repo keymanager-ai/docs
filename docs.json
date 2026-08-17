@@ -40,10 +40,14 @@
             "pages": [
               "certificates/overview",
               "certificates/discovery",
-              "certificates/inventory-private-keys",
-              "certificates/issuers-remote-ca",
               "certificates/certificate-stores",
+              "certificates/inventory-private-keys",
               "certificates/csr-issuance",
+              "certificates/issuers-remote-ca",
+              "untitled-page-3",
+              "untitled-page",
+              "untitled-page-2",
+              "untitled-page-4",
               "certificates/self-service"
             ]
           },

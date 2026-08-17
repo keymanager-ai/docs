@@ -3,6 +3,410 @@ title: "Discovery"
 description: "Discovery jobs, quick discovery, network scanning, and settings."
 ---
 
-<Note>
-This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault Discovery enables organizations to identify, assess, and bring unmanaged digital certificates under centralized control. It continuously expands certificate visibility across network, domain, and cloud-based environments and connects discovered certificates with inventory, risk analysis, lifecycle monitoring, and certificate stores.
+
+Discovery is a foundational capability within KryptoVault Certificate Management because certificates often exist outside formal issuance processes. These may include certificates deployed on application servers, external domains, cloud platforms, network appliances, and other infrastructure endpoints.
+
+By automating certificate identification, KryptoVault helps reduce certificate blind spots, improve cryptographic governance, and prevent outages caused by unknown or expired certificates.
+
+## Key capabilities
+
+KryptoVault Discovery provides:
+
+- Network-based certificate discovery
+- Domain-based certificate discovery
+- Cloudflare-integrated discovery
+- Configurable discovery scopes
+- Manual and scheduled execution
+- Automatic certificate import
+- Certificate-store integration
+- Job execution history
+- Discovery result analytics
+- Blackout-window controls
+- Blacklist enforcement
+- Retry and timeout management
+- Certificate trust and algorithm analysis
+
+These capabilities support the broader certificate lifecycle by connecting discovery results with certificate inventory, validation, expiration monitoring, and security-risk assessment.
+
+## Discovery methods
+
+### Network Discovery
+
+Network Discovery identifies certificates exposed across configured network locations.
+
+The discovery scope can include:
+
+- Static IPv4 addresses
+- CIDR ranges
+- IP address ranges
+- Individual ports
+- Port ranges
+
+This method is suitable for locating certificates deployed across internal infrastructure such as:
+
+- Web and application servers
+- Load balancers
+- API gateways
+- Network appliances
+- Internal services
+- Certificate-enabled endpoints
+
+KryptoVault can process multiple IP addresses or network ranges within a discovery job and evaluate certificate-enabled services available on the configured ports. The current product requirements define support for Static IP, CIDR Range, and IP Range discovery models.
+
+### Domain Discovery
+
+Domain Discovery identifies certificates associated with configured domain names.
+
+It is designed for certificate visibility across:
+
+- Public websites
+- Customer-facing applications
+- APIs
+- Internet-accessible services
+- Internal domain-based services
+- Multi-domain environments
+
+Domain Discovery validates configured domains and scans the applicable ports to retrieve certificate information. Multiple domains can be included within the same discovery scope.
+
+### Cloudflare Discovery
+
+Cloudflare Discovery integrates with Cloudflare through an API endpoint and access token to retrieve certificate and domain-related information.
+
+This capability is useful for organizations that use Cloudflare to manage:
+
+- Public domains
+- DNS zones
+- Edge services
+- TLS termination
+- Cloud-hosted applications
+- Internet-facing infrastructure
+
+Cloudflare Discovery allows certificates managed or exposed through the connected environment to be incorporated into KryptoVault’s centralized certificate estate.
+
+## Discovery processing model
+
+A discovery job defines the environment to be scanned and the operational policy applied during execution.
+
+The processing model includes:
+
+1. **Scope definition** The organization defines the network, domain, or cloud source to be assessed.
+2. **Port evaluation** KryptoVault connects to configured service ports or port ranges.
+3. **Certificate identification** Certificates exposed by reachable endpoints are collected and evaluated.
+4. **Result processing** Successful and failed discovery results are recorded.
+5. **Certificate onboarding** Identified certificates can be added to the managed inventory.
+6. **Lifecycle integration** Imported certificates become available for validation, expiry monitoring, risk assessment, tagging, and store association.
+
+This model creates a direct connection between infrastructure discovery and certificate lifecycle management.
+
+## Automatic certificate import
+
+KryptoVault can automatically import certificates identified during discovery.
+
+When automatic import is enabled, the discovered certificate is associated with a selected certificate store and becomes part of the centralized certificate inventory.
+
+Imported certificates can then be used for:
+
+- Certificate-chain validation
+- Expiration monitoring
+- Issuer identification
+- Trust-level classification
+- Cryptographic algorithm analysis
+- Lifecycle tracking
+- Risk evaluation
+- Certificate-store association
+
+The current product requirements specify that a linked certificate store is mandatory when Auto Import is enabled.
+
+## Certificate-store integration
+
+Discovery is integrated with KryptoVault Certificate Stores.
+
+A linked certificate store acts as the managed destination for certificates imported from discovery operations. This relationship allows certificates identified outside formal enrollment workflows to be brought into the same governance model as enrolled or generated certificates.
+
+A discovered certificate may subsequently be:
+
+- Validated
+- Tagged
+- Assigned to a store
+- Monitored for expiration
+- Reviewed for security risks
+- Associated with lifecycle events
+- Prepared for renewal or replacement
+
+## Scheduling and automation
+
+KryptoVault supports recurring discovery through configurable schedules.
+
+Scheduled discovery helps organizations:
+
+- Continuously refresh certificate inventory
+- Detect newly deployed certificates
+- Identify changes in network or domain environments
+- Monitor certificate replacement
+- Detect expiring or misconfigured certificates
+- Reduce dependence on manual scans
+
+A discovery schedule can define a start date, end date, recurrence pattern, and backend-generated execution expression.
+
+Scheduled operation is particularly valuable in dynamic environments where certificates are frequently added, replaced, or redeployed.
+
+## Discovery execution lifecycle
+
+Discovery jobs move through controlled operational states.
+
+### Created
+
+The job has been configured and is available for execution.
+
+### Scheduled
+
+The job has been queued for a configured execution time.
+
+### In Progress
+
+The discovery process is actively scanning the defined scope.
+
+### Completed
+
+The execution has finished and its results are available for review.
+
+KryptoVault preserves execution status and run history to support operational monitoring and traceability.
+
+## Run history and execution intelligence
+
+Each discovery execution produces a historical record.
+
+Run information can include:
+
+- Discovery method
+- Execution type
+- Start and end time
+- Duration
+- Execution status
+- Total scan scope
+- Successful results
+- Failed results
+- Discovered certificate count
+- Error information
+- State-transition history
+
+The execution type can be classified as either manual or scheduled.
+
+This historical information enables organizations to evaluate discovery reliability, identify unreachable targets, and understand certificate-discovery trends over time.
+
+## Discovery analytics
+
+KryptoVault provides analytics that summarize discovery operations and discovered certificate characteristics.
+
+The product can present information such as:
+
+- Total configured discovery jobs
+- Jobs by discovery method
+- Completed jobs
+- Scheduled jobs
+- Jobs in progress
+- Last scan time
+- Average runtime
+- Successful and failed runs
+- Newly discovered certificates
+- Total discovered certificates
+- Signature algorithm distribution
+- Certificate trust distribution
+
+These analytics connect operational discovery performance with cryptographic and certificate-management insights.
+
+## Signature algorithm visibility
+
+KryptoVault classifies discovered certificates according to their signature algorithms.
+
+This helps organizations:
+
+- Identify legacy cryptographic algorithms
+- Assess current signing practices
+- Detect weak or non-standard signatures
+- Plan cryptographic-policy improvements
+- Prepare for algorithm migration
+
+The current product interface includes examples such as SHA256 and SHA384. Algorithm analysis also supports the broader post-quantum readiness capabilities of KryptoVault.
+
+## Certificate trust classification
+
+Discovered certificates can be classified by trust level.
+
+Supported classifications may include:
+
+- Domain Validation
+- Organization Validation
+- Extended Validation
+- Unknown
+
+Trust classification provides context about how the certificate was issued and the level of identity validation associated with it.
+
+## Blackout windows
+
+KryptoVault supports blackout windows that prevent discovery jobs from running during restricted periods.
+
+Blackout windows are useful when scanning must be avoided during:
+
+- Business-critical operating hours
+- Planned maintenance
+- Peak transaction periods
+- Infrastructure upgrades
+- Sensitive processing windows
+
+Authorized users may be permitted to override a blackout window for selected jobs when organizational policy allows it.
+
+This capability helps align certificate discovery with operational availability requirements.
+
+## Blacklist governance
+
+KryptoVault supports central blacklist policies that exclude defined infrastructure or certificate sources from discovery.
+
+Blacklist controls can include:
+
+- Domains
+- IP addresses
+- CIDR ranges
+- Ports
+- Certificate issuers
+
+Wildcard patterns may be used for supported domain and issuer exclusions.
+
+Blacklist policies help organizations:
+
+- Exclude restricted environments
+- Prevent scanning of sensitive infrastructure
+- Avoid unsupported endpoints
+- Enforce organizational boundaries
+- Apply legal or compliance restrictions
+- Reduce unnecessary scan traffic
+
+Authorized roles may be allowed to override blacklist restrictions for approved discovery scenarios.
+
+## Timeout and retry controls
+
+Discovery jobs support configurable timeout and retry behaviour.
+
+Timeout controls prevent a job from waiting indefinitely for an unresponsive endpoint.
+
+Retry controls allow KryptoVault to repeat failed connection attempts before classifying an endpoint as unsuccessful.
+
+Together, these controls improve discovery reliability across unstable, geographically distributed, or intermittently available environments.
+
+## Partial-result handling
+
+KryptoVault can support partial discovery results.
+
+When partial results are allowed, certificates successfully identified within a discovery scope can be retained even when other targets fail.
+
+When partial results are disabled, the platform can prevent incomplete discovery output from being committed.
+
+This allows organizations to choose between:
+
+- Maximum inventory coverage
+- Strict result completeness
+
+The appropriate approach depends on operational policy and the expected reliability of the target environment.
+
+## Discovery modes and policy control
+
+Discovery methods can be centrally enabled or disabled.
+
+This allows administrators to control which discovery technologies are available within the organization.
+
+For example:
+
+- Network Discovery may be enabled for internal infrastructure
+- Domain Discovery may be enabled for public services
+- Cloudflare Discovery may be enabled only when an approved integration exists
+
+Central mode control helps ensure that discovery functionality is aligned with platform configuration, licensing, security, and organizational policy.
+
+## Security and governance
+
+Discovery operations are governed through role-based access control.
+
+Permissions can be applied to capabilities such as:
+
+- Creating discovery jobs
+- Running discovery jobs
+- Modifying job configuration
+- Deleting jobs
+- Viewing run history
+- Managing discovery settings
+- Enabling automatic import
+- Overriding blackout windows
+- Overriding blacklist restrictions
+- Accessing discovered certificate inventory
+
+Role-based governance helps ensure that discovery is performed only by authorized users and that sensitive infrastructure configuration remains protected. The current KeyManager requirements support module-level permissions, role assignments, and user access controls.
+
+## Audit and traceability
+
+KryptoVault records discovery-related activity to provide accountability and operational traceability.
+
+Audit information can include:
+
+- Job creator
+- Creation date and time
+- Last modifier
+- Modification date and time
+- Deletion information
+- Execution start and end
+- State changes
+- Execution outcome
+- Error information
+
+This supports internal audits, security reviews, troubleshooting, and compliance reporting.
+
+## Enterprise use cases
+
+KryptoVault Discovery supports use cases such as:
+
+### Unmanaged certificate identification
+
+Locate certificates deployed outside approved PKI or issuance processes.
+
+### Certificate outage prevention
+
+Identify certificates approaching expiration before they disrupt services.
+
+### Certificate inventory reconciliation
+
+Compare expected certificate assets with certificates actually deployed across infrastructure.
+
+### Cloud certificate visibility
+
+Extend certificate governance into Cloudflare-managed environments.
+
+### Cryptographic posture assessment
+
+Identify certificate algorithms, trust levels, and weak cryptographic configurations.
+
+### Merger and acquisition discovery
+
+Assess certificate assets inherited from acquired or integrated environments.
+
+### Continuous compliance monitoring
+
+Run recurring scans to detect certificates that violate organizational certificate policies.
+
+### Certificate migration planning
+
+Identify certificates that must be renewed, replaced, consolidated, or migrated to stronger algorithms.
+
+## Product value
+
+KryptoVault Discovery helps organisations:
+
+- Eliminate certificate blind spots
+- Build a complete certificate inventory
+- Reduce certificate-related outages
+- Detect unmanaged infrastructure
+- Automate recurring certificate identification
+- Improve cryptographic governance
+- Centralize multi-environment certificate visibility
+- Support compliance and audit requirements
+- Connect discovery with certificate lifecycle management
+- Prepare for cryptographic and post-quantum migration

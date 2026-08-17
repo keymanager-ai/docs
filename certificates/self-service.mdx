@@ -1,8 +1,165 @@
 ---
-title: "Self-service requests"
-description: "Request products, approval workflow, and settings."
+title: "Self Service"
+description: "KryptoVault Self-Service Requests enable authorized users and application teams to request certificates through a controlled, policy-driven process without depending on PKI administrators for every certificate request.
+
+The capability combines delegated certificate consumption with centralized governance. It allows organizations to expand certificate access while retaining control over who can request certificates, which issuers may be used, how requests are approved, and how issued certificates are incorporated into the managed certificate lifecycle."
 ---
 
+/
+
 <Note>
-This page is a scaffold stub. Content coming soon.
+  This page is a scaffold stub. Content coming soon.
 </Note>
+
+## Controlled Certificate Consumption
+
+Self-Service Requests allow certificate consumers to initiate certificate requests within a governed framework.
+
+This helps organizations decentralize routine certificate demand while preserving centralized PKI policy.
+
+Application teams, infrastructure teams, DevOps teams, and other authorized users can request certificates without requiring direct access to the underlying certificate authority.
+
+KryptoVault therefore separates certificate consumption from CA administration.
+
+## Policy-Driven Request Model
+
+Self-service certificate requests can be aligned with organizational certificate policies.
+
+A request can be governed according to the certificate purpose, issuer, cryptographic requirements, approval model, certificate validity, and operational destination.
+
+This helps ensure that delegated certificate requests remain consistent with enterprise PKI standards.
+
+## Issuer Integration
+
+Self-service requests are connected with the KryptoVault issuer framework.
+
+Once a request is approved and ready for issuance, it can be routed to a supported issuer such as:
+
+- ACME
+- Microsoft AD CS through KryptoVault Gateway
+- Vault PKI
+
+This allows users to consume certificates from different PKI technologies through a common request model.
+
+The underlying certificate authority remains responsible for signing, while KryptoVault manages the request lifecycle, governance, and certificate onboarding.
+
+## Request Approval
+
+KryptoVault can apply approval controls before a certificate request proceeds to issuance.
+
+Approval introduces governance between certificate demand and certificate creation.
+
+This is particularly valuable where certificate issuance must be reviewed because of:
+
+- Security requirements
+- Business ownership
+- Sensitive domains
+- Privileged applications
+- Production environments
+- Regulatory requirements
+
+Approval workflows help prevent unauthorized or inappropriate certificate issuance.
+
+## Request Lifecycle
+
+Self-service requests move through a controlled lifecycle from submission to final outcome.
+
+The lifecycle provides visibility into whether a request is awaiting action, approved, rejected, or completed through certificate issuance.
+
+This centralized request model helps organizations maintain accountability for certificate consumption without requiring manual tracking outside the platform.
+
+## Certificate Issuance Integration
+
+Approved self-service requests can flow directly into the CSR and certificate issuance process.
+
+KryptoVault can coordinate certificate request generation, issuer communication, signing, and certificate onboarding as part of the same lifecycle.
+
+This provides continuity between the business request and the cryptographic issuance operation.
+
+## Inventory Integration
+
+Certificates issued through self-service requests become part of the centralized KryptoVault certificate inventory.
+
+Once issued, they can participate in the same management model as other certificates.
+
+This includes:
+
+- Expiration monitoring
+- Lifecycle management
+- Cryptographic analysis
+- Risk assessment
+- Certificate-store association
+- Issuer tracking
+- Renewal management
+
+Self-service therefore does not create a separate unmanaged certificate population.
+
+## Certificate Store Integration
+
+Self-service certificates can be associated with the appropriate certificate store.
+
+This maintains operational context for the certificate and supports downstream lifecycle activities.
+
+The store relationship helps connect the request with the application, environment, service, or infrastructure where the certificate will be managed.
+
+## Private Key Integration
+
+Where the issuance workflow includes key generation or key association, KryptoVault can maintain the relationship between the resulting certificate and its corresponding private key.
+
+This ensures that self-service issuance remains connected to the broader cryptographic asset-management model.
+
+Private-key access can remain restricted even when certificate request capabilities are delegated to a wider user population.
+
+## Delegated PKI Operations
+
+Self-Service Requests help organizations distribute routine certificate operations without distributing PKI administrative privileges.
+
+This allows application or infrastructure teams to obtain certificates while certificate authority management, issuer configuration, and sensitive cryptographic controls remain under dedicated administrative ownership.
+
+The model supports separation of duties between:
+
+- Certificate consumers
+- Approvers
+- PKI administrators
+- Security administrators
+- Infrastructure operators
+
+## Role-Based Governance
+
+Access to self-service certificate capabilities is controlled through the KryptoVault role and permission model.
+
+Organizations can determine which users are permitted to initiate requests and which users are responsible for approving or administering certificate operations.
+
+The existing KeyManager requirements provide the underlying role-based and module-level access framework used to govern platform operations.
+
+## Standardization
+
+Self-service certificate delivery helps reduce inconsistent certificate acquisition practices.
+
+Without a centralized request model, teams may obtain certificates through different certificate authorities, manual processes, scripts, or unmanaged tools.
+
+KryptoVault provides a common governance layer that helps standardize certificate consumption across teams and environments.
+
+## Automation
+
+Self-service workflows can reduce manual PKI effort by connecting approved requests directly with certificate issuance.
+
+This can shorten certificate delivery time while maintaining policy enforcement.
+
+Automation is particularly valuable in organizations with high certificate volumes or frequent certificate requests.
+
+## Renewal Continuity
+
+Certificates originally issued through self-service workflows remain under KryptoVault lifecycle management.
+
+This allows subsequent expiration monitoring and renewal activity to remain connected to the original certificate context.
+
+The result is a managed lifecycle rather than a one-time certificate request.
+
+## Audit and Traceability
+
+KryptoVault maintains traceability for self-service request activity.
+
+This helps organizations understand who initiated a certificate request, how it progressed through approval and issuance, and how the resulting certificate entered the managed estate.
+
+Auditability is important for internal security reviews, compliance, ownership tracking, and incident investigation.

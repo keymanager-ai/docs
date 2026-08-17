@@ -1,8 +1,156 @@
 ---
-title: "Inventory & private keys"
-description: "Managing discovered certificates and their private keys."
+title: "Certificate Inventory"
+description: "KryptoVault Inventory & Private Keys provides a centralized cryptographic asset repository for certificates and their associated private-key relationships. The capability gives organizations a unified view of certificates that have been discovered, imported, enrolled, generated, renewed, or otherwise brought under management.
+
+The inventory acts as the operational source of truth for certificate assets across enterprise environments. It connects certificate identity, trust, validity, issuer relationships, cryptographic posture, lifecycle state, deployment context, and key ownership into a single management model."
 ---
 
 <Note>
-This page is a scaffold stub. Content coming soon.
+  This page is a scaffold stub. Content coming soon.
 </Note>
+
+## Centralized Certificate Inventory
+
+KryptoVault consolidates certificates originating from different sources into a common inventory.
+
+This includes certificates identified through discovery, certificates imported from external sources, certificates created through issuance workflows, and certificates that have been renewed or otherwise updated during their lifecycle.
+
+By maintaining these assets within one managed repository, organizations gain consistent visibility regardless of where or how the certificate was originally created.
+
+This approach reduces fragmented certificate tracking across teams, infrastructure platforms, certificate authorities, spreadsheets, and individual applications.
+
+## Certificate Trust and Validation
+
+KryptoVault evaluates certificates to provide visibility into their trust relationships and operational validity.
+
+The platform can analyze certificate chains, issuer relationships, validity periods, cryptographic characteristics, and revocation information. This helps identify certificates that may be technically present but unsuitable for continued use because of trust failures, expiration, weak cryptography, or configuration issues.
+
+Certificate validation contributes directly to the platform's broader risk-management capabilities by helping security teams identify assets that require remediation.
+
+## Certificate Lifecycle Visibility
+
+Certificates are managed as lifecycle assets rather than static files.
+
+KryptoVault maintains visibility across stages such as certificate discovery, enrollment, generation, renewal, revocation, and retirement.
+
+This lifecycle model allows organizations to understand how a certificate entered the environment, how it has changed over time, and what operational actions have been performed against it.
+
+Lifecycle visibility also supports audit, compliance, incident response, renewal planning, and certificate migration initiatives.
+
+## Expiration and Availability Management
+
+Certificate expiration is continuously monitored as part of the inventory.
+
+KryptoVault helps organizations identify certificates that are already expired or approaching the end of their validity period so that renewal or replacement can be planned before application availability is affected.
+
+Expiration monitoring is particularly important in large environments where certificates are distributed across multiple applications, infrastructure services, certificate stores, and cloud platforms.
+
+Centralized visibility reduces dependency on individual application teams to manually track certificate validity.
+
+## Cryptographic Posture Assessment
+
+KryptoVault evaluates the cryptographic characteristics of managed certificates to help organizations understand their current security posture.
+
+The platform can assess public-key and signature algorithms and identify certificates that may rely on outdated, weak, or non-compliant cryptographic technologies.
+
+This provides security teams with visibility into cryptographic dependencies across the enterprise and supports policy enforcement, algorithm modernization, and long-term cryptographic migration planning.
+
+## Post-Quantum Readiness
+
+KryptoVault extends certificate inventory management to support post-quantum cryptographic readiness.
+
+Certificates can be assessed based on the algorithms they use and their compatibility with future cryptographic security requirements.
+
+This allows organizations to build an inventory of cryptographic dependencies before beginning a migration to quantum-resistant technologies.
+
+Post-quantum assessment is especially useful for large enterprises where certificate replacement must be coordinated across applications, infrastructure, certificate authorities, and business services.
+
+## Certificate Risk Intelligence
+
+The inventory contributes to certificate risk analysis by identifying assets that may introduce operational or security exposure.
+
+Potential risks include weak cryptographic configurations, invalid trust chains, expired certificates, self-signed certificates, missing revocation information, certificate reuse, and certificates whose validity period falls outside organizational standards.
+
+This risk intelligence allows security and PKI teams to move from simple certificate inventory management toward proactive cryptographic governance.
+
+## Certificate and Issuer Relationships
+
+Each certificate maintains a relationship with its issuing authority.
+
+KryptoVault uses these relationships to provide visibility into public and private certificate authority environments and to connect certificate inventory with issuer-management capabilities.
+
+This allows organizations to understand which certificate authorities are responsible for different areas of the certificate estate and assess the operational impact of issuer expiration, trust changes, or CA migration.
+
+## Certificate Store Relationships
+
+KryptoVault maintains relationships between certificates and the certificate stores where they are managed or deployed.
+
+This creates visibility into the operational locations associated with a certificate and supports lifecycle activities such as deployment, renewal, replacement, and migration.
+
+Certificate-store integration also allows certificates imported through discovery or issuance workflows to become part of the same managed operational model.
+
+## Private Key Management
+
+Private keys are among the most sensitive assets associated with digital certificates.
+
+KryptoVault provides centralized visibility into the relationship between certificates and their corresponding private keys, helping organizations understand where key material exists and whether a managed certificate has the required cryptographic key association.
+
+This capability supports secure certificate deployment, renewal, signing, authentication, and migration activities.
+
+## Private Key Governance
+
+Access to private-key-related capabilities is controlled through the platform's role-based access model.
+
+Organizations can restrict sensitive key operations to authorized users and roles while maintaining broader certificate visibility for operational teams.
+
+This separation helps reduce unnecessary exposure of private-key information and supports governance requirements around cryptographic assets.
+
+The existing KeyManager requirements define role-based access and module-level permissions that can be applied to sensitive certificate and key-management operations.
+
+## Certificate and Key Lifecycle
+
+Certificate and private-key relationships can be maintained throughout the cryptographic lifecycle.
+
+The lifecycle typically begins with key creation or key association, continues through certificate issuance and deployment, and extends through renewal, rotation, revocation, and retirement.
+
+Maintaining these relationships within KryptoVault helps prevent scenarios where certificates are renewed or migrated without visibility into the corresponding key material.
+
+## Discovery Integration
+
+Inventory is directly connected with KryptoVault Discovery.
+
+Certificates identified through discovery can be imported into the centralized inventory and subsequently evaluated for trust, expiration, cryptographic posture, lifecycle status, and risk.
+
+The current Discovery requirements define automatic certificate import and integration with certificate stores as part of the discovery process.
+
+This integration allows organizations to move from passive certificate identification to active certificate governance.
+
+## Issuance Integration
+
+Certificates created through CSR and issuance workflows are also incorporated into the centralized inventory.
+
+This ensures that both discovered certificates and certificates issued through controlled PKI processes are managed using the same inventory model.
+
+As a result, KryptoVault provides a consistent view across externally deployed certificates and centrally issued certificates.
+
+## Security and Governance
+
+Certificate and private-key operations are governed through role-based access control and auditability.
+
+Sensitive operations can be restricted according to organizational responsibilities while maintaining sufficient visibility for security, infrastructure, and PKI teams.
+
+This supports separation of duties and reduces the risk of unauthorized certificate or key operations.
+
+## Audit and Traceability
+
+KryptoVault maintains operational traceability for certificate and private-key lifecycle activity.
+
+This enables organizations to understand when certificates entered the platform, how they changed over time, which lifecycle activities were performed, and which users or systems were involved.
+
+Auditability supports internal security reviews, compliance assessments, incident investigation, and certificate ownership governance.
+
+## Enterprise Use Cases
+
+KryptoVault Inventory & Private Keys supports enterprise scenarios such as centralized certificate inventory, certificate expiration management, cryptographic risk assessment, private-key visibility, application migration, certificate authority migration, post-quantum readiness, incident response, and compliance reporting.
+
+It is particularly valuable in environments where certificates are distributed across multiple teams, platforms, certificate authorities, and infrastructure technologies.

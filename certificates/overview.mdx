@@ -1,8 +1,457 @@
 ---
 title: "Overview"
-description: "The CLM dashboard and lifecycle at a glance."
+description: "Product scope, capabilities, dashboard, governance, and business value"
 ---
 
 <Note>
-This page is a scaffold stub. Content coming soon.
+  This page is a scaffold stub. Content coming soon.
 </Note>
+
+## Get Started 
+
+KryptoVault Certificate Management provides centralized visibility, governance, automation, and lifecycle control for digital certificates across enterprise environments.
+
+The module enables organizations to discover certificates, consolidate certificate inventory, evaluate certificate health, manage certificate authorities and certificate stores, process certificate signing requests, track certificate issuance, protect private keys, and support controlled self-service certificate requests.
+
+By bringing certificate operations into a unified platform, KryptoVault helps reduce certificate-related outages, strengthen cryptographic governance, improve operational efficiency, and maintain visibility across distributed infrastructure.
+
+## Product Scope
+
+Certificate Management covers the following functional areas:
+
+- Certificate discovery
+- Certificate inventory
+- Private key associations
+- Certificate validation
+- Certificate lifecycle tracking
+- Certificate authority management
+- Remote CA integration
+- Certificate store management
+- CSR processing
+- Certificate issuance
+- Certificate renewal and revocation
+- Self-service certificate requests
+- Certificate expiration monitoring
+- Cryptographic risk assessment
+- Post-quantum readiness analysis
+
+---
+
+## Core Capabilities
+
+### Centralized Certificate Visibility
+
+KryptoVault consolidates certificate information from multiple sources into a centralized inventory.
+
+This centralized view helps organizations identify where certificates are located, who owns them, when they expire, and whether they meet defined security standards.
+
+---
+
+### Certificate Discovery
+
+KryptoVault discovers certificates across supported infrastructure and cloud environments.
+
+### Certificate Inventory Management
+
+The certificate inventory provides a unified repository for discovered, imported, enrolled, generated, and renewed certificates.
+
+Inventory data may include:
+
+| Information area | Description |
+| :-- | :-- |
+| Subject | Primary certificate identity represented by the Common Name |
+| Subject Alternative Names | Additional domain names or identities protected by the certificate |
+| Validity | Certificate issue and expiration dates |
+| Issuer | Certificate Authority that issued the certificate |
+| Chain | Trust-chain status and chain length |
+| Certificate store | Store or stores associated with the certificate |
+| Issuer type | Public CA or Private CA |
+| Trust level | DV, OV, EV, or other configured classification |
+| Tags | Business or technical labels associated with the certificate |
+| Metadata | Creation, modification, and ownership information |
+
+The inventory supports enterprise-wide certificate visibility and lifecycle governance.
+
+---
+
+### Certificate Health and Validation
+
+KryptoVault evaluates certificate configuration, trust, and cryptographic strength.
+
+Validation capabilities may include:
+
+- Certificate-chain validation
+- Root and intermediate CA verification
+- Public CA and Private CA classification
+- Certificate validity verification
+- Subject Alternative Name verification
+- Wildcard certificate identification
+- Multi-domain certificate identification
+- CRL availability
+- OCSP availability
+- Certificate Transparency checks
+- Pre-certificate SCT validation
+- Signature algorithm validation
+- Public key algorithm validation
+- Certificate lifespan evaluation
+
+Validation results allow security teams to identify certificates requiring review or remediation.
+
+---
+
+### Cryptographic Risk Assessment
+
+KryptoVault identifies certificate-related cryptographic and operational risks.
+
+The platform may classify certificates into risk categories such as:
+
+- Insecure public keys
+- Insecure signature algorithms
+- Missing CRL or OCSP information
+- Self-signed certificates
+- Reused certificates
+- Short or excessive certificate lifespan
+- Invalid certificate chain
+- Expired certificates
+- Certificates approaching expiration
+- Post-quantum-incompatible certificates
+
+Risk distribution provides a prioritized view of certificate security exposure.
+
+---
+
+### Post-Quantum Readiness
+
+KryptoVault evaluates whether certificates use cryptographic algorithms classified as post-quantum compatible.
+
+The product can present:
+
+- Post-quantum readiness status
+- Public key algorithm
+- Signature algorithm
+- Public key object identifier
+- Signature object identifier
+- Reason for incompatibility
+- Classical versus quantum-safe classification
+
+This capability supports cryptographic inventory assessment and future post-quantum migration planning.
+
+---
+
+### Certificate Lifecycle Management
+
+KryptoVault tracks certificates throughout their operational lifecycle.
+
+Lifecycle states may include:
+
+- Discovered
+- Enrolled
+- Generated
+- Imported
+- Renewed
+- Revoked
+- Deleted
+
+Each lifecycle activity may record:
+
+- Event type
+- Date and time
+- User
+- Source
+- Certificate store
+- Issuer
+- Related request or job
+
+This provides traceability and an auditable history of certificate operations.
+
+---
+
+### Expiration and Renewal Management
+
+The platform monitors certificate and issuer expiration to reduce service disruption.
+
+Expiration capabilities include:
+
+- Expired-certificate identification
+- Near-expiry monitoring
+- Expiration trend analysis
+- Issuer expiration monitoring
+- Certificate validity-duration display
+- Renewal eligibility
+- Renewal actions
+- Expiration notifications
+
+The dashboard highlights expired certificates and certificates approaching expiration within configured time windows.
+
+---
+
+### Issuer and Remote CA Management
+
+KryptoVault supports centralized management of certificate issuers and Remote Certificate Authority integrations.
+
+Issuer-management capabilities may include:
+
+- Public CA visibility
+- Private CA visibility
+- Remote CA configuration
+- Issuer certificate monitoring
+- Issuer validity tracking
+- Certificate profile management
+- Issuance relationship tracking
+- Issuer expiration monitoring
+
+This enables organizations to operate across multi-CA and hybrid PKI environments.
+
+---
+
+### Certificate Store Management
+
+Certificate stores represent managed destinations where certificates can be imported, enrolled, stored, synchronized, or deployed.
+
+KryptoVault provides visibility into:
+
+- Linked certificate stores
+- Enrollment stores
+- Discovery stores
+- Certificate-to-store associations
+- Store assignment
+- Store removal
+- Certificate deployment destinations
+- Store-level ownership and metadata
+
+A certificate may be linked to multiple certificate stores depending on operational requirements.
+
+---
+
+### CSR and Certificate Issuance
+
+KryptoVault supports Certificate Signing Request generation and certificate issuance workflows.
+
+CSR lifecycle states may include:
+
+- Created
+- Validating
+- Submitted
+- Signed
+- Imported
+- Rejected
+- Cancelled
+
+The platform provides visibility into CSR processing, signing, import status, certificate issuance, and related lifecycle events.
+
+---
+
+### Private Key Management
+
+KryptoVault associates private keys with managed certificates and controls access through role-based permissions.
+
+Private key capabilities may include:
+
+- Private key association
+- Private key ownership
+- Key availability status
+- Key assignment
+- Key removal
+- Certificate-to-key relationship tracking
+- Access restrictions
+- Audit visibility
+
+This capability helps organizations maintain control over sensitive cryptographic material.
+
+---
+
+### Self-Service Certificate Requests
+
+KryptoVault enables authorized users to request certificates through controlled self-service workflows.
+
+Self-service capabilities may include:
+
+- Certificate request submission
+- Request templates
+- Approval workflow
+- Request validation
+- Issuance processing
+- Request status tracking
+- Approval and rejection visibility
+- Request history
+
+The self-service model reduces manual effort for PKI administrators while maintaining governance and approval controls.
+
+---
+
+## Certificate Management Dashboard
+
+The Certificate Management dashboard provides a consolidated view of certificate operations, infrastructure, requests, lifecycle states, and risk.
+
+### Certificate Overview
+
+The Certificate Overview section displays:
+
+- Total certificates
+- Certificates with a valid chain
+- Quantum-proof certificates
+
+These indicators provide a summary of certificate volume, trust health, and cryptographic readiness.
+
+---
+
+### Infrastructure Overview
+
+The Infrastructure Overview section displays:
+
+- Certificate stores
+- Issuers
+- Remote Certificate Authorities
+
+This provides visibility into the infrastructure supporting certificate issuance, storage, and lifecycle operations.
+
+---
+
+### Self-Service Overview
+
+The Self-Service Overview section displays:
+
+- Requested certificates
+- Approved requests
+- Rejected requests
+
+These indicators provide visibility into self-service certificate demand and workflow outcomes.
+
+---
+
+### Certificate Expiry Trend
+
+The Certificate Expiry Trend presents upcoming certificate expirations across categories such as:
+
+- Discovered
+- Enrolled
+- Generated
+
+This helps teams identify periods with high renewal demand.
+
+---
+
+### Issuer Expiry Trend
+
+The Issuer Expiry Trend displays expiration timelines for:
+
+- Public issuers
+- Private issuers
+
+Issuer expiration can affect multiple dependent certificates and is therefore monitored separately.
+
+---
+
+### CSR State Distribution
+
+The CSR State Distribution presents Certificate Signing Requests by processing state, including:
+
+- Created
+- Validating
+- Submitted
+- Signed
+- Imported
+- Rejected
+- Cancelled
+
+This provides a consolidated view of issuance-pipeline activity.
+
+---
+
+### Certificate Lifecycle State
+
+The Certificate Lifecycle State view classifies certificates according to their current lifecycle stage, including:
+
+- Discovered
+- Enrolled
+- Generated
+- Renewed
+- Revoked
+
+This helps organizations understand how certificates entered and moved through the platform.
+
+---
+
+### Certificate Risk Distribution
+
+The Certificate Risk Distribution provides a summarized view of certificate security and policy findings.
+
+Risk categories may include:
+
+- Insecure public keys
+- Insecure signatures
+- Missing CRL or OCSP
+- Self-signed certificates
+- Certificate reuse
+- Invalid certificate lifespan
+
+This enables security teams to identify high-priority remediation areas.
+
+---
+
+## Governance and Access Control
+
+Certificate Management functions are controlled through role-based access.
+
+Roles and permissions can govern access to:
+
+- Dashboard visibility
+- Discovery job creation
+- Discovery execution
+- Certificate inventory
+- Certificate details
+- Certificate import
+- Certificate renewal
+- Certificate deletion
+- Private key actions
+- Issuer management
+- Remote CA management
+- Certificate-store management
+- CSR management
+- Approval workflows
+- Discovery settings
+
+The KeyManager requirements define role types, role levels, module-level permissions, multiple role assignments, and user access controls.
+
+---
+
+## Automation and Policy Controls
+
+KryptoVault provides policy-based controls for certificate operations.
+
+These controls include:
+
+- Scheduled discovery
+- Automatic certificate import
+- Blackout windows
+- Blacklisted domains
+- Blacklisted IP addresses
+- Blacklisted ports
+- Blacklisted issuers
+- Discovery-mode enablement
+- Timeout configuration
+- Retry configuration
+- Automatic cleanup
+- Inventory cleanup
+- Override permissions
+- Store assignment
+- Auto-tagging
+
+These features allow organizations to automate certificate operations while preserving security and governance requirements.
+
+## Business Value
+
+KryptoVault Certificate Management helps organizations:
+
+- Reduce certificate-related service outages
+- Centralize certificate visibility
+- Improve certificate ownership tracking
+- Standardize certificate issuance
+- Automate certificate discovery
+- Detect weak cryptographic configurations
+- Monitor certificate expiration
+- Improve PKI governance
+- Support hybrid and multi-CA environments
+- Protect private key relationships
+- Strengthen auditability
+- Prepare for post-quantum migration
