@@ -3,132 +3,86 @@ title: "Certificate Signing Request (CSR)"
 description: "KryptoVault CSR & Issuance provides a centralized capability for generating Certificate Signing Requests and issuing certificates through configured certificate authorities.\nThe capability connects certificate request creation, cryptographic key generation, issuer selection, certificate signing, and certificate onboarding into a governed lifecycle. It helps organizations standardize certificate issuance across different PKI environments while maintaining centralized visibility and control."
 ---
 
-KryptoVault Certificate Signing Request (CSR) provides a controlled way to generate certificate requests and route them through configured issuers for certificate issuance.
+KryptoVault Certificate Signing Request (CSR) provides a centralized capability for generating CSRs and managing certificate issuance activity within Certificate Management.
 
-It connects key generation, request creation, issuer selection, signing, and certificate onboarding into a single governed lifecycle.
+It gives organizations a consistent place to create certificate requests, track their processing state, and maintain visibility into the resulting certificate lifecycle.
 
 <Info>
-  A CSR represents the identity and cryptographic information required by a Certificate Authority to issue a certificate. KryptoVault manages this process centrally so certificate requests can follow consistent security and governance controls.
+  This page describes the CSR capability currently represented in KryptoVault. It does not assume certificate-authority behavior that is not defined in the available product sources.
 </Info>
 
 ## CSR generation
 
-KryptoVault can generate Certificate Signing Requests as part of a managed certificate lifecycle.
+KryptoVault supports the creation of Certificate Signing Requests as part of the certificate management process.
 
-CSR generation can be associated with newly generated key material or existing cryptographic keys, depending on the issuance workflow.
-
-## CSR lifecycle
-
-A Certificate Signing Request progresses through a controlled lifecycle from creation to final outcome.
-
-<Steps>
-  <Step title="Created">
-    The CSR is generated and enters the request lifecycle.
-  </Step>
-  <Step title="Validating">
-    KryptoVault evaluates the request against applicable request and cryptographic requirements.
-  </Step>
-  <Step title="Submitted">
-    The validated request is submitted to the configured issuer for certificate signing.
-  </Step>
-  <Step title="Signed">
-    The Certificate Authority signs the request and returns the issued certificate.
-  </Step>
-  <Step title="Imported">
-    The issued certificate is brought into KryptoVault Certificate Inventory and becomes part of the managed certificate lifecycle.
-  </Step>
-</Steps>
-
-A request can also end in **Rejected** or **Cancelled** when issuance should not continue.
-
-<Note>
-  CSR lifecycle state represents the status of the certificate request. Once the certificate is issued and imported, the resulting certificate follows its own certificate lifecycle.
-</Note>
-
-## Request validation
-
-Before a CSR is submitted for signing, KryptoVault can validate the request against applicable certificate and issuer requirements.
-
-Validation helps ensure that the request is suitable for issuance and that its identity and cryptographic context are aligned with the configured certificate policy.
-
-This provides a control point before the request reaches the Certificate Authority.
-
-## Issuer-based certificate signing
-
-KryptoVault routes validated CSRs to the issuer associated with the certificate request.
-
-The issuer remains responsible for certificate signing and trust establishment, while KryptoVault provides orchestration, lifecycle visibility, and governance around the request.
-
-<Tabs>
-  <Tab title="ACME">
-    KryptoVault can route certificate requests through an ACME-compatible issuer for automated certificate issuance.
-
-    This model is well suited to environments where certificate enrollment and renewal are expected to operate with minimal manual intervention.
-  </Tab>
-  <Tab title="Microsoft AD CS">
-    Microsoft Active Directory Certificate Services can be accessed through a KryptoVault Gateway.
-
-    The Gateway provides controlled connectivity between KryptoVault and an internal AD CS environment without requiring the Certificate Authority to be directly exposed to the central platform.
-  </Tab>
-  <Tab title="Vault PKI">
-    KryptoVault can use HashiCorp Vault PKI as an issuer for application, infrastructure, and cloud-native certificate workflows.
-
-    Vault performs the signing operation while KryptoVault manages the request and resulting certificate within the broader lifecycle.
-  </Tab>
-</Tabs>
-
-## Issuance processing
-
-The issuance process connects CSR creation with the configured Certificate Authority and the managed certificate inventory.
-
-<Steps>
-  <Step title="Generate request">
-    KryptoVault creates the CSR and establishes its cryptographic context.
-  </Step>
-  <Step title="Validate request">
-    The CSR is checked before being routed for signing.
-  </Step>
-  <Step title="Submit to issuer">
-    The request is sent to the configured Certificate Authority or issuer integration.
-  </Step>
-  <Step title="Issue certificate">
-    The Certificate Authority signs the CSR according to its own certificate policy and trust model.
-  </Step>
-  <Step title="Onboard certificate">
-    The resulting certificate is returned to KryptoVault and incorporated into Certificate Inventory.
-  </Step>
-</Steps>
-
-## Certificate onboarding
-
-Issued certificates become managed certificate assets in KryptoVault rather than remaining isolated issuance outputs.
-
-Once onboarded, the certificate can participate in expiration monitoring, trust validation, cryptographic analysis, risk assessment, Certificate Store association, renewal, and lifecycle tracking.
+A CSR represents a certificate request before the final certificate is issued. Keeping CSR activity inside KryptoVault provides a central record of certificate requests and their current processing state.
 
 <CardGroup cols={2}>
-  <Card title="Inventory" icon="certificate">
-    The issued certificate becomes part of the centralized Certificate Inventory.
+  <Card title="CSR Creation" icon="file-circle-plus">
+    Generate and maintain certificate requests within KryptoVault.
   </Card>
 
-  <Card title="Certificate Store" icon="folder-tree">
-    The certificate can be associated with the operational store where it is managed or intended to be used.
+  <Card title="Certificate Issuance" icon="certificate">
+    Track certificate requests through the issuance process until a final outcome is reached.
   </Card>
 </CardGroup>
 
-## Key and certificate association
+## CSR lifecycle
 
-CSR generation and certificate issuance remain connected to the cryptographic key used to create the request.
+The current KryptoVault interface represents CSR activity through a defined set of states.
 
-Maintaining this association is important for later certificate operations such as deployment, renewal, replacement, signing, authentication, and key rotation.
+<Steps>
+  <Step title="Created">
+    The CSR has been created and is present in the request lifecycle.
+  </Step>
+  <Step title="Validating">
+    The CSR is in the validation stage.
+  </Step>
+  <Step title="Submitted">
+    The CSR has moved into the submitted stage of processing.
+  </Step>
+  <Step title="Signed">
+    The CSR has reached the signed stage.
+  </Step>
+  <Step title="Imported">
+    The CSR has reached the imported stage and the resulting certificate can be represented within Certificate Management.
+  </Step>
+</Steps>
 
-<Warning>
-  Private-key operations are sensitive cryptographic activities and should remain restricted to authorized roles and controlled storage mechanisms.
-</Warning>
+A CSR can also reach **Rejected** or **Cancelled** as a final processing outcome.
+
+<Note>
+  The CSR lifecycle represents the state of the certificate request. The resulting certificate is managed separately through Certificate Inventory and its certificate lifecycle.
+</Note>
+
+## CSR state visibility
+
+KryptoVault provides visibility into CSR activity across the certificate environment.
+
+<CardGroup cols={2}>
+  <Card title="Processing Visibility" icon="diagram-project">
+    Helps teams understand how certificate requests are distributed across the CSR lifecycle.
+  </Card>
+
+  <Card title="Outcome Visibility" icon="chart-pie">
+    Provides visibility into completed, rejected, cancelled, and other CSR outcomes represented by the platform.
+  </Card>
+</CardGroup>
+
+This gives certificate-management teams a consolidated view of request activity without requiring separate tracking outside KryptoVault.
+
+## Certificate issuance continuity
+
+CSR activity is connected with the broader certificate management lifecycle.
+
+Once a CSR results in a certificate, the certificate can become part of the centralized Certificate Inventory, where it can participate in the certificate-management capabilities available in KryptoVault.
+
+<Info>
+  The available sources confirm CSR generation, CSR lifecycle visibility, and certificate issuance as product capabilities. Detailed CA routing, signing behavior, and issuer-specific CSR processing are intentionally not described here because those behaviors are not defined in the provided sources.
+</Info>
 
 ## Governance and traceability
 
-CSR and issuance operations are controlled through KryptoVault's role-based access model.
+CSR activity is part of the KryptoVault certificate-management environment and can be governed through the platform's existing role and permission model.
 
-Organizations can restrict certificate request creation, issuer usage, signing-related operations, and lifecycle actions according to administrative responsibility.
-
-KryptoVault also maintains request and issuance traceability so teams can understand how a CSR progressed, which issuer processed it, and how the resulting certificate entered the managed inventory.
+Maintaining CSR state within the platform also provides operational traceability across certificate request activity and its eventual outcome.
