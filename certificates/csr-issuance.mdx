@@ -125,22 +125,6 @@ Maintaining this association is important for later certificate operations such 
   Private-key operations are sensitive cryptographic activities and should remain restricted to authorized roles and controlled storage mechanisms.
 </Warning>
 
-## Multi-issuer operation
-
-KryptoVault supports multiple issuer technologies within the same certificate-management environment.
-
-This allows organizations to use different Certificate Authorities for different certificate populations while maintaining a consistent CSR and issuance workflow.
-
-For example, an enterprise can use Microsoft AD CS for internal certificates, ACME for automated public-facing certificates, and Vault PKI for application or cloud-native workloads.
-
-## Renewal through issuance
-
-Certificate renewal can reuse the same managed issuance model.
-
-When a certificate requires replacement, a new request can be generated and routed to the appropriate issuer while maintaining the certificate's operational context and Certificate Store relationship.
-
-This supports continuity between the expiring certificate and its replacement.
-
 ## Governance and traceability
 
 CSR and issuance operations are controlled through KryptoVault's role-based access model.
