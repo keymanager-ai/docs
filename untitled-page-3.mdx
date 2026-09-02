@@ -1,3 +1,111 @@
 ---
 title: "Remote DNS"
 ---
+
+KryptoVault **Remote DNS** automates DNS-based certificate validation during certificate signing.
+
+It allows KryptoVault to push the required DNS verification record directly to a configured DNS connection and validate it from within the platform, reducing the need for users to manually switch to the DNS provider during the signing process.
+
+<Info>
+  Remote DNS is used as part of certificate signing when DNS verification is required. It connects the certificate request with the DNS environment responsible for the requested domain.
+</Info>
+
+## DNS integration
+
+Organizations can configure DNS connections in KryptoVault and make them available during certificate signing.
+
+When a CSR requires DNS validation, KryptoVault can identify the configured DNS connections that match the requested domain and present the relevant connection for use.
+
+<CardGroup cols={2}>
+  <Card title="Configured DNS Connections" icon="globe">
+    Maintain DNS integrations that can be reused during certificate validation.
+  </Card>
+
+  <Card title="Domain Matching" icon="link">
+    KryptoVault identifies DNS connections associated with the domain being validated.
+  </Card>
+</CardGroup>
+
+## DNS validation flow
+
+Remote DNS is integrated directly into the CSR signing process.
+
+<Steps>
+  <Step title="Certificate request requires validation">
+    A CSR enters a signing flow where DNS-based verification is required.
+  </Step>
+  <Step title="Matching DNS is identified">
+    KryptoVault evaluates the configured Remote DNS connections and identifies the DNS environment matching the requested domain.
+  </Step>
+  <Step title="DNS record is prepared">
+    The required validation record becomes available as part of the certificate-validation flow.
+  </Step>
+  <Step title="Push to DNS">
+    The validation record can be pushed directly from KryptoVault to the selected DNS connection.
+  </Step>
+  <Step title="Validate">
+    Once the record is available in DNS, validation can be performed from KryptoVault without requiring the user to manually recreate the record in the DNS provider.
+  </Step>
+</Steps>
+
+## Push to DNS
+
+The **Push to DNS** capability removes the manual process of copying DNS verification information and creating the record separately in the DNS platform.
+
+When the user initiates the push, KryptoVault displays configured DNS connections relevant to the domain and allows the required record to be sent directly to the selected DNS environment.
+
+<Card title="Automated DNS Record Push" icon="arrow-up-from-bracket">
+  The required verification record can be pushed directly to the matching Remote DNS connection from the certificate workflow.
+</Card>
+
+This keeps the DNS validation process within the same certificate-management workflow.
+
+## Domain-based recommendation
+
+KryptoVault can recommend the applicable Remote DNS connection based on the domain involved in the certificate request.
+
+For example, if a configured DNS connection manages the requested domain, that connection can be surfaced as the relevant option during validation.
+
+<Note>
+  The recommendation is based on the configured DNS environment and its relationship with the domain being validated.
+</Note>
+
+## Validation within KryptoVault
+
+Previously, DNS verification required users to manually move between KryptoVault and the external DNS environment to create or verify validation records.
+
+Remote DNS allows this activity to be handled from within KryptoVault.
+
+<CardGroup cols={2}>
+  <Card title="Previous Process" icon="arrow-right-arrow-left">
+    Copy the validation details, open the DNS provider, create the required record, return to the certificate workflow, and validate.
+  </Card>
+
+  <Card title="Remote DNS Process" icon="wand-magic-sparkles">
+    Select the matching DNS connection, push the record, and continue validation directly from KryptoVault.
+  </Card>
+</CardGroup>
+
+This reduces manual intermediate steps and simplifies certificate validation.
+
+## Relationship with CSR signing
+
+Remote DNS is not an independent certificate source. It supports the **CSR signing flow** by handling DNS-side validation requirements.
+
+The flow can be represented as:
+
+**CSR → Remote CA order → DNS challenge → Remote DNS → Push Record → Validation → Continue certificate signing**
+
+This keeps DNS validation connected with the certificate request and its signing lifecycle.
+
+## Centralized DNS connectivity
+
+Remote DNS allows DNS integrations to be configured once and reused across certificate operations that require DNS validation.
+
+This gives KryptoVault a centralized DNS integration layer rather than requiring DNS credentials or DNS operations to be handled independently for every certificate request.
+
+## Governance
+
+Remote DNS configuration and usage operate within KryptoVault's existing role and permission model.
+
+This allows organizations to restrict DNS integration administration while still making approved DNS connections available to authorized certificate-management workflows.
