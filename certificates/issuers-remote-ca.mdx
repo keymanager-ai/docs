@@ -3,6 +3,106 @@ title: "Issuers"
 description: "ACME, AD CS via gateway, and Vault PKI issuers."
 ---
 
-<Note>
-  This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault **Issuers** provide centralized management of private Certificate Authorities that participate in certificate trust validation and certificate signing.
+
+An issuer can represent either a **Root Certificate Authority** or an **Intermediate Certificate Authority**. By registering these issuers in KryptoVault, organizations can bring their internal trust hierarchy under centralized certificate management.
+
+<Info>
+  An Issuer represents a trusted private Certificate Authority registered directly in KryptoVault. It can participate in certificate validation, certificate signing, or both, depending on its configured role.
+</Info>
+
+## Private CA hierarchy
+
+KryptoVault supports two issuer levels:
+
+<CardGroup cols={2}>
+  <Card title="Root CA" icon="building-columns">
+    Represents the root of a private certificate trust hierarchy.
+  </Card>
+
+  <Card title="Intermediate CA" icon="diagram-project">
+    Represents an intermediate Certificate Authority operating beneath a root CA.
+  </Card>
+</CardGroup>
+
+Both types are registered using their X.509 PEM certificate and become part of the managed certificate trust model.
+
+## Issuer roles
+
+An issuer can perform one or both roles within KryptoVault.
+
+<Tabs>
+  <Tab title="Validator">
+    A Validator issuer participates in certificate validation.
+
+    KryptoVault uses the issuer when evaluating certificate trust and certificate-chain validity.
+  </Tab>
+  <Tab title="Signer">
+    A Signer issuer can be used to sign new certificates.
+
+    When an issuer is configured as a Signer, its corresponding private key is required and must match the issuer certificate.
+  </Tab>
+</Tabs>
+
+An issuer may therefore be used only for trust validation, only for signing, or for both capabilities depending on its configured role.
+
+## Issuer onboarding
+
+Issuer registration begins with the issuer certificate.
+
+<Steps>
+  <Step title="Provide issuer certificate">
+    The Root or Intermediate CA certificate is provided to KryptoVault in PEM format.
+  </Step>
+  <Step title="Define issuer role">
+    The issuer is configured for validation, signing, or both.
+  </Step>
+  <Step title="Associate signing key">
+    If signing is enabled, the corresponding private key is provided and validated against the issuer certificate.
+  </Step>
+  <Step title="Validate issuer">
+    KryptoVault validates the issuer information before adding it to the trusted issuer set.
+  </Step>
+</Steps>
+
+## Certificate trust validation
+
+Issuers form part of KryptoVault's certificate-validation model.
+
+When an issuer is added or changed, KryptoVault can re-evaluate certificates and their chains against the available issuer information. This allows certificates that were previously considered invalid because of missing trust information to be reassessed when the relevant issuer becomes available.
+
+<Card title="Chain Revalidation" icon="link">
+  KryptoVault revalidates certificate chains against the managed issuer set so certificate trust can remain aligned with the configured private CA hierarchy.
+</Card>
+
+## Certificate signing
+
+An issuer configured with the **Signer** role can participate in certificate signing.
+
+A matching private key is required when signing is enabled. This creates a controlled relationship between the issuer's CA certificate and the cryptographic material required for signing operations.
+
+<Warning>
+  Signing capability requires the issuer's corresponding private key. The key must match the public certificate before the issuer can operate as a Signer.
+</Warning>
+
+## Trusted issuer state
+
+Issuers can be active or inactive within the platform.
+
+An active issuer is treated as part of the trusted issuer environment and can participate in the capabilities associated with its assigned roles.
+
+This gives organizations control over which private CAs are currently available to KryptoVault without removing the issuer definition from the platform.
+
+## Issuer visibility
+
+KryptoVault maintains operational visibility into managed issuers, including issuer identity, public or private classification, Root or Intermediate CA level, active state, Validator and Signer roles, certificate validity period, and expiration state.
+
+This gives PKI and security teams a centralized view of the private CAs currently participating in the certificate environment.
+
+## Issuer lifecycle and governance
+
+Issuer records are managed as security-sensitive certificate assets.
+
+KryptoVault maintains metadata for issuer and signing-key activity, providing traceability around creation, modification, and deletion.
+
+The platform's existing role and permission model can be used to restrict issuer administration and signing-related operations to authorized users.
