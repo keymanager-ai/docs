@@ -1,170 +1,102 @@
 ---
 title: "Certificate Signing Request (CSR)"
-description: "KryptoVault CSR & Issuance provides a centralized capability for generating Certificate Signing Requests and issuing certificates through configured certificate authorities.
-
-The capability connects certificate request creation, cryptographic key generation, issuer selection, certificate signing, and certificate onboarding into a governed lifecycle. It helps organizations standardize certificate issuance across different PKI environments while maintaining centralized visibility and control."
+description: "KryptoVault CSR & Issuance provides a centralized capability for generating Certificate Signing Requests and issuing certificates through configured certificate authorities.\nThe capability connects certificate request creation, cryptographic key generation, issuer selection, certificate signing, and certificate onboarding into a governed lifecycle. It helps organizations standardize certificate issuance across different PKI environments while maintaining centralized visibility and control."
 ---
 
+KryptoVault Certificate Signing Request (CSR) provides a centralized capability for creating certificate requests, tracking their processing state, and maintaining continuity into the managed certificate lifecycle.
+
+CSR activity can originate directly within Certificate Management or through **Self Service**, allowing certificate requests from different entry points to be tracked within the same CSR capability.
+
+## CSR entry points
+
+<CardGroup cols={2}>
+  <Card title="Direct CSR" icon="file-circle-plus">
+    Certificate requests can be created directly within the CSR capability and tracked through their processing lifecycle.
+  </Card>
+
+  <Card title="Self-Service CSR" icon="user-check">
+    Certificate requests initiated through Self Service are also connected with CSR management, providing a common request lifecycle.
+  </Card>
+</CardGroup>
+
+<Info>
+  Direct and self-service certificate requests are brought into the same CSR management model rather than being maintained as separate request inventories.
+</Info>
+
+## CSR lifecycle
+
+KryptoVault represents certificate requests through a defined lifecycle.
+
+<Steps>
+  <Step title="Created">
+    The CSR has been created and is available within the request lifecycle.
+  </Step>
+  <Step title="Validating">
+    The CSR is currently in the validation stage.
+  </Step>
+  <Step title="Submitted">
+    The CSR has moved into the submitted stage of processing.
+  </Step>
+  <Step title="Signed">
+    The CSR has reached the signed stage.
+  </Step>
+  <Step title="Imported">
+    The CSR has reached the imported stage and the resulting certificate can become part of Certificate Management.
+  </Step>
+</Steps>
+
+A CSR can also reach **Rejected** or **Cancelled** depending on its processing outcome.
+
 <Note>
-  This page is a scaffold stub. Content coming soon.
+  The CSR lifecycle represents the state of the certificate request. Once the resulting certificate is available, the certificate itself is managed through Certificate Inventory and its own lifecycle.
 </Note>
 
-## Certificate Signing Request Generation
+## Self Service and CSR
 
-KryptoVault enables organizations to generate Certificate Signing Requests as part of a controlled certificate lifecycle.
+Self Service provides an additional entry point for certificate requests.
 
-A CSR contains the iNdentity and cryptographic information required by a certificate authority to issue a certificate. By generating CSRs through KryptoVault, organizations can standardize request creation and ensure that certificate requests follow approved cryptographic and governance practices.
+A request initiated through Self Service becomes part of the CSR management process so that certificate-request activity remains centralized within KryptoVault.
 
-CSR generation can be integrated with private-key creation or existing key material, depending on the certificate workflow.
+<Steps>
+  <Step title="Request initiated">
+    An authorized user initiates a certificate request through Self Service.
+  </Step>
+  <Step title="CSR created">
+    The request becomes part of CSR management.
+  </Step>
+  <Step title="CSR state tracked">
+    The request is tracked through the same CSR states represented within Certificate Management.
+  </Step>
+</Steps>
 
-## Centralized Issuance Workflow
+This approach provides a common request lifecycle regardless of whether the CSR originates directly from Certificate Management or through Self Service.
 
-Once a CSR has been created, KryptoVault can route the request to the appropriate configured issuer.
+## CSR visibility
 
-The issuance process can be connected with supported issuer technologies such as:
+KryptoVault provides centralized visibility into certificate-request activity.
 
-- ACME
-- Microsoft AD CS through KryptoVault Gateway
-- Vault PKI
+<CardGroup cols={2}>
+  <Card title="Processing Visibility" icon="diagram-project">
+    Provides visibility into requests currently moving through the CSR lifecycle.
+  </Card>
 
-This allows different certificate authority technologies to participate in a common certificate issuance model.
+  <Card title="Outcome Visibility" icon="chart-pie">
+    Provides visibility into CSR outcomes such as Signed, Imported, Rejected, and Cancelled.
+  </Card>
+</CardGroup>
 
-KryptoVault acts as the orchestration and governance layer, while the connected certificate authority remains responsible for certificate signing.
+This gives certificate-management teams a consolidated view of direct and self-service certificate requests.
 
-## Issuer-Based Certificate Issuance
+## Certificate lifecycle continuity
 
-Certificate issuance is performed through the issuer associated with the request.
+CSR activity connects certificate request processing with Certificate Inventory.
 
-The selected issuer determines the certificate authority environment responsible for signing the CSR and producing the final certificate.
+When a CSR results in a certificate, the resulting certificate can become part of the centralized certificate inventory and continue through the certificate lifecycle managed by KryptoVault.
 
-This enables organizations to support multiple issuance models within the same platform, including enterprise PKI, automated certificate services, and cloud-native PKI environments.
+The CSR record therefore represents the **request lifecycle**, while Certificate Inventory represents the **resulting certificate lifecycle**.
 
-## Cryptographic Key Association
+## Governance and traceability
 
-Certificate issuance is closely linked with private-key management.
+CSR activity follows KryptoVault's existing role and permission model.
 
-A CSR is created using a cryptographic key pair, and the issued certificate is associated with the corresponding private key.
-
-Maintaining this relationship within KryptoVault helps ensure that certificate and key material remain connected throughout the lifecycle.
-
-This relationship supports later activities such as renewal, replacement, deployment, and key rotation.
-
-## Certificate Request Lifecycle
-
-KryptoVault maintains the lifecycle of certificate requests from creation through issuance.
-
-A request can progress through controlled processing stages such as creation, validation, submission, signing, import, rejection, or cancellation.
-
-This lifecycle model provides visibility into the state of certificate requests and helps distinguish pending certificate operations from completed issuance.
-
-## Request Validation
-
-Before certificate issuance, KryptoVault can validate the certificate request against applicable rules and issuer requirements.
-
-Validation can help confirm that the request is suitable for submission and that the cryptographic and identity information meets the expected certificate policy.
-
-This reduces invalid certificate requests and improves consistency across issuance workflows.
-
-## Certificate Signing
-
-After validation, the CSR is submitted to the configured certificate authority for signing.
-
-The certificate authority applies its own certificate policy, trust model, validity rules, and signing configuration.
-
-Once signing is completed, the resulting certificate is returned to KryptoVault and incorporated into the managed certificate lifecycle.
-
-## Certificate Onboarding
-
-Issued certificates can be automatically added to the centralized certificate inventory.
-
-Once onboarded, the certificate becomes available for:
-
-- Lifecycle monitoring
-- Expiration tracking
-- Certificate validation
-- Cryptographic analysis
-- Risk assessment
-- Certificate-store association
-- Private-key association
-
-This ensures that certificates created through issuance workflows are managed consistently with certificates discovered or imported from other sources.
-
-## Certificate Store Integration
-
-Issued certificates can be associated with an appropriate certificate store.
-
-This provides operational context for where the certificate is intended to be managed or deployed.
-
-Certificate-store integration also supports future lifecycle events such as renewal, replacement, and migration.
-
-## Multi-Issuer Issuance
-
-KryptoVault supports issuance across multiple certificate authority technologies.
-
-For example, an organization may use:
-
-- AD CS for internal enterprise certificates
-- ACME for automated public-facing certificates
-- Vault PKI for application or cloud-native workloads
-
-KryptoVault provides a common issuance layer across these issuer technologies.
-
-This allows organizations to maintain different PKI platforms while applying consistent certificate governance.
-
-## Automated Certificate Issuance
-
-Certificate issuance can be automated where supported by the connected certificate authority.
-
-Automation helps reduce manual PKI administration and enables certificate operations to scale across large application and infrastructure environments.
-
-Automated issuance is particularly useful for short-lived certificates, cloud-native environments, APIs, and frequently changing infrastructure.
-
-## Certificate Renewal
-
-The CSR & Issuance capability also supports certificate renewal workflows.
-
-When a managed certificate approaches expiration, a new request can be generated and submitted to the appropriate issuer.
-
-The replacement certificate remains connected to the existing certificate lifecycle, certificate store, and operational context.
-
-This helps reduce manual renewal effort and lowers the risk of certificate-related outages.
-
-## Issuance Governance
-
-Certificate issuance is governed through KryptoVault's role-based access control model.
-
-Organizations can restrict certificate request creation, issuer usage, signing operations, and lifecycle actions to authorized users or roles.
-
-This helps enforce separation of duties between certificate consumers, PKI administrators, security teams, and infrastructure operators.
-
-The existing KeyManager requirements define the underlying role and permission model for these controls.
-
-## Audit and Traceability
-
-KryptoVault maintains traceability across certificate request and issuance activity.
-
-This allows organizations to understand when a certificate request was created, how it progressed through the issuance process, which issuer was used, and how the resulting certificate entered the inventory.
-
-Audit visibility supports compliance, troubleshooting, security review, and operational accountability.
-
-## Integration with Inventory & Private Keys
-
-CSR & Issuance is directly connected with KryptoVault Inventory & Private Keys.
-
-The issued certificate becomes part of the centralized certificate inventory, while the associated key remains linked to the certificate.
-
-This provides continuity between certificate creation and ongoing lifecycle management.
-
-## Integration with Issuers & Remote CA
-
-CSR & Issuance relies on the configured issuer framework to complete certificate signing.
-
-This creates a direct relationship between certificate requests and the organization's PKI infrastructure.
-
-The same issuance model can therefore operate across ACME, AD CS through Gateway, and Vault PKI.
-
-## Integration with Certificate Stores
-
-Certificate Stores provide the operational destination context for issued certificates.
-
-This ensures that certificates created through issuance workflows are not managed in isolation but remain connected with the applications, environments, or infrastructure where they are used.
+Centralized CSR tracking provides operational traceability across certificate requests initiated directly through Certificate Management and requests originating through Self Service.

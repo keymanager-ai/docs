@@ -1,3 +1,121 @@
 ---
 title: "Remote Deployment"
 ---
+
+KryptoVault **Remote Deployment** allows signed or renewed certificates to be deployed directly from Certificate Management to a configured target.
+
+It extends the certificate lifecycle beyond issuance by allowing a certificate to move from signing or renewal into deployment without requiring a separate manual process.
+
+<Info>
+  Remote Deployment is used after a certificate has been signed or renewed. The user selects the target where the certificate should be deployed, and KryptoVault tracks the deployment outcome.
+</Info>
+
+## Deployment from the certificate lifecycle
+
+Remote Deployment is connected with the certificate signing and renewal flow.
+
+Once a certificate is available, it can proceed directly into deployment.
+
+<Steps>
+  <Step title="Certificate signed or renewed">
+    A certificate becomes available after a successful signing or renewal operation.
+  </Step>
+  <Step title="Select deployment target">
+    The user selects the configured target where the certificate should be deployed.
+  </Step>
+  <Step title="Start deployment">
+    KryptoVault initiates the deployment to the selected target.
+  </Step>
+  <Step title="Track result">
+    The deployment result is recorded and can be reviewed through deployment logs.
+  </Step>
+</Steps>
+
+## Deployment targets
+
+Remote Deployment uses **target configurations** to determine where a certificate should be deployed.
+
+<Card title="Target Configuration" icon="bullseye">
+  A deployment target represents the destination selected for certificate deployment.
+</Card>
+
+This keeps the destination configuration separate from the certificate itself and allows deployment to be initiated using an existing configured target.
+
+## Signing and deployment flow
+
+Remote Deployment can form part of the same operational flow as certificate signing.
+
+The confirmed product workflow allows a certificate to be signed and then deployed to the selected target.
+
+**CSR / Renewal → Certificate Signed → Select Target → Deploy → Deployment Result**
+
+This reduces the manual work required between certificate issuance and installation.
+
+## Renewal and redeployment
+
+Remote Deployment also supports the certificate renewal lifecycle.
+
+When a managed certificate is renewed through KryptoVault, the renewed certificate can continue into deployment using the target configuration selected for the operation.
+
+<CardGroup cols={2}>
+  <Card title="Certificate Renewal" icon="rotate">
+    The certificate is renewed through the managed certificate workflow.
+  </Card>
+
+  <Card title="Deployment" icon="rocket">
+    The renewed certificate can then be deployed to the configured destination.
+  </Card>
+</CardGroup>
+
+This creates continuity between renewal and certificate rollout.
+
+## Deployment visibility
+
+KryptoVault provides visibility into the outcome of certificate deployment.
+
+Deployment activity records whether the deployment completed successfully or failed.
+
+<Tabs>
+  <Tab title="Success">
+    Indicates that the certificate was successfully deployed to the selected target.
+  </Tab>
+  <Tab title="Failure">
+    Indicates that the deployment did not complete successfully and requires review.
+  </Tab>
+</Tabs>
+
+## Deployment logs
+
+Deployment logs provide operational visibility into certificate deployment activity.
+
+They allow certificate-management teams to review the outcome of a deployment and identify whether the target operation succeeded or failed.
+
+<Card title="Deployment Logs" icon="rectangle-list">
+  Provides a record of deployment execution and its resulting success or failure status.
+</Card>
+
+## Certificate lifecycle continuity
+
+Remote Deployment connects certificate management with the final delivery stage of the certificate lifecycle.
+
+<CardGroup cols={3}>
+  <Card title="Signing" icon="file-signature">
+    The certificate is issued through the applicable signing workflow.
+  </Card>
+
+  <Card title="Renewal" icon="rotate">
+    Existing certificates can be renewed when required.
+  </Card>
+
+  <Card title="Deployment" icon="server">
+    Signed or renewed certificates can be delivered to their configured target.
+  </Card>
+</CardGroup>
+
+This helps KryptoVault maintain continuity from certificate request through issuance and into deployment.
+
+## Governance and traceability
+
+Remote Deployment operates within KryptoVault's existing role and permission model.
+
+Deployment results are retained through deployment logs, providing traceability for certificate delivery operations.

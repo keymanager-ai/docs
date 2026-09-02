@@ -1,206 +1,130 @@
 ---
-title: "Certificate stores"
-description: "KryptoVault Certificate Stores provide a structured way to organize, associate, and manage certificates according to their operational destination, ownership, application context, or deployment environment.
-
-Certificate Stores act as logical management containers within the certificate lifecycle. They help organizations group certificates into meaningful operational units and maintain a clear relationship between a certificate and the environment in which it is used.
-
-This capability is especially important in large enterprise environments where certificates are distributed across multiple applications, platforms, infrastructure layers, business units, and certificate sources."
+title: "Certificate Stores"
+description: "KryptoVault Certificate Stores provide a structured way to organize, associate, and manage certificates according to their operational destination, ownership, application context, or deployment environment.\nCertificate Stores act as logical management containers within the certificate lifecycle. They help organizations group certificates into meaningful operational units and maintain a clear relationship between a certificate and the environment in which it is used.\nThis capability is especially important in large enterprise environments where certificates are distributed across multiple applications, platforms, infrastructure layers, business units, and certificate sources."
 ---
 
+KryptoVault Certificate Stores provide a structured way to organize and assign certificates according to application, environment, ownership, or operational context.
+
+They act as logical management containers within the certificate lifecycle, helping organizations keep certificate populations grouped in a way that reflects how infrastructure is actually managed.
+
+<Info>
+  A Certificate Store provides operational context for a certificate. It helps answer where the certificate belongs, who is responsible for it, and how it should be handled across lifecycle activities.
+</Info>
+
+## Organizing certificates
+
+Certificate Stores allow organizations to group certificates into meaningful operational boundaries.
+
+<CardGroup cols={2}>
+  <Card title="Application or Service" icon="apartment">
+    Group certificates that belong to a specific application, service, or platform.
+  </Card>
+
+  <Card title="Environment" icon="layer-group">
+    Separate certificate populations across environments such as production, staging, or development.
+  </Card>
+
+  <Card title="Business or Team Ownership" icon="users">
+    Organize certificates according to the team, business unit, or operational owner responsible for them.
+  </Card>
+
+  <Card title="Deployment Context" icon="server">
+    Associate certificates with the infrastructure or destination where they are managed or expected to be used.
+  </Card>
+</CardGroup>
+
+This model reduces fragmented certificate ownership and provides a consistent organizational structure across the certificate estate.
+
+## Assigning certificates to stores
+
+Certificates can be associated with a Certificate Store as they enter or move through the KryptoVault lifecycle.
+
+<Steps>
+  <Step title="Certificate enters KryptoVault">
+    A certificate may arrive through discovery, import, enrollment, issuance, or renewal.
+  </Step>
+  <Step title="Store context is applied">
+    The certificate is associated with the Certificate Store that represents its intended operational or ownership context.
+  </Step>
+  <Step title="Lifecycle continues within that context">
+    Renewal, reassignment, migration, and other lifecycle activities can retain the certificate's store relationship.
+  </Step>
+</Steps>
+
+This helps KryptoVault maintain continuity between the certificate asset and the environment where it belongs.
+
+## Store relationships
+
+A Certificate Store represents the operational side of the certificate relationship, while the issuer represents the certificate's source of trust and issuance.
+
+<CardGroup cols={2}>
+  <Card title="Issuer Relationship" icon="building-columns">
+    Identifies where the certificate was issued and which CA or issuer signed it.
+  </Card>
+
+  <Card title="Store Relationship" icon="folder-tree">
+    Identifies where the certificate is logically managed, grouped, or intended for use.
+  </Card>
+</CardGroup>
+
+Together, these relationships provide both **issuance context** and **operational context** for a managed certificate.
+
+## Multi-store certificate management
+
+A certificate can be associated with more than one Certificate Store where the same certificate is relevant across multiple operational locations.
+
+This is useful in environments such as high-availability services, clustered applications, redundant infrastructure, or multi-region deployments.
+
 <Note>
-  This page is a scaffold stub. Content coming soon.
+  Multi-store relationships help teams understand the broader operational impact of a certificate change, renewal, or replacement.
 </Note>
 
-## Organizing Certificates
-
-KryptoVault allows certificates to be organized into certificate stores based on how the organization manages its infrastructure.
-
-A store can represent a logical or operational boundary such as:
-
-- An application environment
-- A business unit
-- A platform
-- A certificate deployment destination
-- A service group
-- A cloud environment
-- A certificate ownership boundary
-
-This provides a consistent way to organize certificate assets without relying only on individual certificate metadata.
-
-By grouping certificates into stores, organizations can simplify certificate ownership, lifecycle management, and operational governance.
-
-## Assigning Certificates to Stores
-
-Certificates can be associated with certificate stores as part of their lifecycle.
-
-This association may occur when a certificate is discovered, imported, enrolled, generated, or later reassigned as part of an operational change.
-
-A certificate-store relationship gives KryptoVault the context required to understand where a certificate belongs and how it should be managed.
-
-This is particularly useful when certificates are moved between environments, applications, or infrastructure platforms.
-
-## Centralized Store Association
-
-KryptoVault maintains a relationship between managed certificates and their assigned stores.
-
-This helps organizations understand:
-
-- Where a certificate is logically managed
-- Which environment is responsible for it
-- Which certificate population belongs to a specific operational group
-- How certificates should be handled during renewal or migration
-- Which certificates are associated with a particular infrastructure context
-
-This association improves certificate traceability across distributed environments.
-
-## Discovery Integration
+## Discovery integration
 
 Certificate Stores are directly integrated with KryptoVault Discovery.
 
-When automatic certificate import is enabled for a discovery job, the discovered certificate is associated with a selected certificate store.
+When automatic import is enabled, certificates identified through discovery can be associated with a selected Certificate Store as they enter the managed inventory.
 
-This allows newly identified certificates to enter the certificate inventory with an existing organizational context rather than appearing as unmanaged assets.
+This gives newly discovered certificates an immediate organizational context rather than leaving them as isolated inventory records.
 
-The current Discovery requirements define linked certificate stores as part of the automatic import process.
+<Card title="Discovery to Store" icon="radar">
+  Discovery identifies the certificate, onboarding brings it into inventory, and the Certificate Store associates it with the correct operational context.
+</Card>
 
-This creates a direct relationship between certificate discovery and managed certificate organization.
+## CSR and issuance integration
 
-## Issuance Integration
+Certificates generated through CSR and issuance workflows can also be associated with the appropriate Certificate Store.
 
-Certificate Stores also integrate with certificate issuance workflows.
+This ensures that newly issued certificates enter the managed lifecycle with a clear destination or ownership context from the beginning.
 
-Certificates generated through CSR and issuance processes can be associated with the relevant store after issuance.
+Certificate Stores therefore provide a common organizational model across certificates originating from discovery, import, enrollment, issuance, and renewal.
 
-This ensures that certificates created through controlled PKI workflows are immediately aligned with their intended operational destination.
+## Ownership and governance
 
-The same store model can therefore support certificates originating from:
+Certificate Stores can be used as organizational boundaries for certificate ownership and responsibility.
 
-- Discovery
-- Import
-- Enrollment
-- Certificate issuance
-- Renewal
+They help separate certificate populations across teams, applications, environments, or business units and provide a clearer management context for renewal, remediation, and operational accountability.
 
-This gives KryptoVault a consistent organizational model across different certificate sources.
+Access to store management and certificate assignment can be controlled through KryptoVault's role-based access model so that sensitive organizational changes remain restricted to authorized users.
 
-## Certificate Lifecycle and Store Context
+## Traceability
 
-Certificate Stores help maintain operational context throughout the certificate lifecycle.
+KryptoVault can maintain the relationship between certificates and their stores as certificate ownership or operational placement changes over time.
 
-A certificate may remain associated with the same store throughout its lifetime or move between stores as infrastructure changes.
+This traceability is useful during certificate renewal, infrastructure migration, ownership changes, compliance review, incident investigation, and environment decommissioning.
 
-This store relationship can support lifecycle activities such as:
+## How Certificate Stores fit into Certificate Management
 
-- Renewal
-- Replacement
-- Migration
-- Reassignment
-- Retirement
+<CardGroup cols={3}>
+  <Card title="Discovery" icon="radar">
+    Discovered certificates can be assigned to a store during onboarding.
+  </Card>
 
-Maintaining store context helps ensure that certificate lifecycle actions are aligned with the correct operational environment.
+  <Card title="Certificate Inventory" icon="certificate">
+    Store relationships provide organizational and operational context for managed certificates.
+  </Card>
 
-## Multi-Store Certificate Management
-
-In some environments, the same certificate may be relevant to more than one managed location or operational context.
-
-KryptoVault can maintain relationships between a certificate and multiple certificate stores where required by the implementation model.
-
-This is useful when a certificate is shared across:
-
-- Multiple application instances
-- Redundant infrastructure
-- Clustered services
-- High-availability environments
-- Multi-region deployments
-
-Centralized visibility into these relationships helps teams understand the broader operational impact of certificate changes.
-
-## Store-Based Governance
-
-Certificate Stores can act as governance boundaries within the platform.
-
-Organizations can use store associations to separate certificate populations according to ownership or responsibility.
-
-For example, different stores may represent different infrastructure teams, environments, application groups, or business units.
-
-This supports clearer accountability and reduces ambiguity around who is responsible for certificate renewal, deployment, and remediation.
-
-## Store Ownership
-
-A store-based management model helps establish ownership for certificate assets.
-
-Ownership becomes particularly important in large organizations where certificate responsibility is distributed across security, infrastructure, application, cloud, and DevOps teams.
-
-By associating certificates with stores, KryptoVault helps create a clear management context for each certificate population.
-
-## Certificate Renewal
-
-Store relationships are important during certificate renewal.
-
-When a certificate is renewed, the replacement certificate must remain connected to the environment where the previous certificate was used.
-
-Maintaining certificate-store context helps preserve this relationship and reduces the risk of a renewed certificate being issued without a clear deployment destination.
-
-## Certificate Migration
-
-Certificate Stores also support certificate migration initiatives.
-
-Organizations may need to move certificates between environments because of:
-
-- Application modernization
-- Cloud migration
-- Infrastructure consolidation
-- Data-center migration
-- Platform replacement
-- Certificate authority migration
-
-Store relationships provide the context needed to identify which certificates belong to the affected environment and how they should be reassigned.
-
-## Integration with Private Keys
-
-Certificate Stores can also provide context for certificate and private-key relationships.
-
-When a certificate is associated with a private key, the store relationship helps identify the operational location or management boundary where the certificate and key are expected to be used.
-
-This is important for secure certificate deployment and lifecycle operations.
-
-## Integration with Issuers
-
-Certificate Stores complement issuer relationships.
-
-The issuer identifies where a certificate was issued, while the store identifies where the certificate is managed or intended to be used.
-
-Together, these relationships provide KryptoVault with both issuance context and operational context.
-
-This enables a more complete certificate asset model across the platform.
-
-## Security and Governance
-
-Access to certificate-store capabilities is controlled through role-based permissions.
-
-Organizations can restrict store management and certificate assignment to authorized users while allowing broader certificate visibility for operational teams.
-
-This helps maintain separation of duties between users responsible for certificate issuance, certificate deployment, infrastructure ownership, and security governance.
-
-The existing KeyManager role-management requirements provide the underlying role and permission model for these controls.
-
-## Audit and Traceability
-
-KryptoVault can maintain traceability for certificate-store relationships throughout the certificate lifecycle.
-
-This helps organizations understand how certificate ownership or operational placement has changed over time.
-
-Such visibility is useful during:
-
-- Compliance reviews
-- Infrastructure migrations
-- Certificate incidents
-- Ownership changes
-- Certificate renewal
-- Environment decommissioning
-
-## Enterprise Use Cases
-
-KryptoVault Certificate Stores support enterprise scenarios such as organizing certificates by application, separating production and non-production certificate populations, assigning certificates to infrastructure teams, managing certificates across cloud environments, supporting certificate migration, and maintaining certificate ownership across multiple business units.
-
-The capability is particularly valuable where thousands of certificates must be managed across different operational environments.
+  <Card title="CSR & Issuance" icon="file-signature">
+    Newly issued certificates can be associated with the appropriate store as part of the managed lifecycle.
+  </Card>
+</CardGroup>

@@ -1,3 +1,194 @@
 ---
 title: "Remote CA"
 ---
+
+KryptoVault **Remote CA** provides centralized management of external Certificate Authority connections used for certificate signing, synchronization, renewal, and certificate visibility.
+
+Remote CA allows organizations to connect supported external CA platforms to KryptoVault and use those connections as part of the managed certificate lifecycle.
+
+<Info>
+  Remote CA represents an external Certificate Authority connection. It is different from an Issuer, which represents a private Root or Intermediate CA registered directly in KryptoVault.
+</Info>
+
+## Supported Remote CA types
+
+KryptoVault currently supports the following Remote CA options:
+
+<CardGroup cols={3}>
+  <Card title="ZeroSSL ACME" icon="certificate">
+    Supports ZeroSSL through the ACME protocol for automated SSL/TLS certificate operations.
+  </Card>
+
+  <Card title="Let's Encrypt ACME" icon="lock">
+    Supports Let's Encrypt through the ACME protocol for public SSL/TLS certificate operations.
+  </Card>
+
+  <Card title="HashiCorp Vault PKI" icon="vault">
+    Supports HashiCorp Vault PKI for private certificate authority environments.
+  </Card>
+</CardGroup>
+
+## Remote CA configuration
+
+A Remote CA is created by first selecting the CA technology to connect with KryptoVault.
+
+<Steps>
+  <Step title="Select Remote CA type">
+    Choose the Remote CA technology to be configured, such as ZeroSSL ACME, Let's Encrypt ACME, or HashiCorp Vault PKI.
+  </Step>
+  <Step title="Configure connection">
+    Provide the connection information required by the selected Remote CA type.
+  </Step>
+  <Step title="Validate connectivity">
+    The connection can be tested and monitored so KryptoVault can confirm whether the Remote CA is available.
+  </Step>
+  <Step title="Use Remote CA in certificate operations">
+    Once configured, the Remote CA becomes available for supported certificate signing, synchronization, renewal, and related workflows.
+  </Step>
+</Steps>
+
+## Certificate signing
+
+Remote CA participates directly in the CSR signing workflow.
+
+A CSR can be submitted through a configured Remote CA, creating an order that is tracked by KryptoVault until the signing process reaches its final outcome.
+
+For ACME-based flows, the CSR can move through challenge validation before the order is finalized.
+
+<Card title="CSR to Remote CA" icon="file-signature">
+  A CSR can be associated with a Remote CA order so certificate signing remains connected to the managed CSR lifecycle.
+</Card>
+
+## ACME challenge flow
+
+For ACME-based Remote CAs, KryptoVault supports challenge-based validation as part of order processing.
+
+<Steps>
+  <Step title="Create order">
+    A Remote CA order is created from the CSR.
+  </Step>
+  <Step title="Select challenge">
+    DNS Challenge is presented as the primary challenge option, while HTTP Challenge remains available in the workflow.
+  </Step>
+  <Step title="Validate DNS challenge">
+    DNS validation can be performed before finalizing the Remote CA order.
+  </Step>
+  <Step title="Finalise order">
+    KryptoVault finalizes the order and polls the CA for completion status.
+  </Step>
+  <Step title="Enroll certificate">
+    When signing succeeds, the resulting certificate can continue into the certificate enrollment and inventory flow.
+  </Step>
+</Steps>
+
+<Note>
+  Remote DNS can be used during the DNS challenge flow to push the required validation record directly to a matching DNS connection.
+</Note>
+
+## Certificate synchronization
+
+KryptoVault supports certificate synchronization with configured Remote CA connections.
+
+The confirmed product flow includes synchronization for **HashiCorp Vault PKI** and **ZeroSSL**, allowing certificates associated with those CA environments to be brought into KryptoVault.
+
+This helps maintain consistency between the external CA environment and the certificates managed within KryptoVault.
+
+## Remote CA certificate visibility
+
+Each Remote CA provides visibility into the certificates associated with that specific CA connection.
+
+Users can open a Remote CA and view the certificates signed through that Remote CA, providing CA-specific certificate context without relying only on the global Certificate Inventory.
+
+<CardGroup cols={2}>
+  <Card title="Remote CA View" icon="building-columns">
+    Provides visibility into certificates associated with a specific Remote CA connection.
+  </Card>
+
+  <Card title="Certificate Inventory" icon="certificate">
+    Signed or synchronized certificates also become part of the broader managed certificate estate.
+  </Card>
+</CardGroup>
+
+## Certificate renewal
+
+KryptoVault supports certificate renewal through Remote CA.
+
+Renewal is not restricted only to expired certificates. A managed certificate can be renewed when required, including before its current validity period ends.
+
+<Steps>
+  <Step title="Initiate renewal">
+    Renewal is initiated from the existing managed certificate.
+  </Step>
+  <Step title="Generate CSR">
+    KryptoVault automatically generates a CSR for the renewal operation.
+  </Step>
+  <Step title="Reuse Remote CA context">
+    The Remote CA is selected from the active certificate's existing context rather than requiring the user to select it again manually.
+  </Step>
+  <Step title="Sign replacement certificate">
+    The renewal proceeds through the applicable Remote CA signing workflow.
+  </Step>
+  <Step title="Update managed certificate estate">
+    The renewed certificate becomes available within Certificate Management.
+  </Step>
+</Steps>
+
+This reduces manual intermediate steps and keeps renewal connected to the certificate's existing CA context.
+
+## Direct signing of existing CSRs
+
+An existing CSR can also be signed directly from the applicable Remote CA context.
+
+This allows users to avoid navigating through a separate multi-step flow to select the Remote CA and CSR again.
+
+<Card title="Direct CSR Signing" icon="bolt">
+  Existing CSRs can be taken directly into the Remote CA signing flow, reducing repeated selection and navigation steps.
+</Card>
+
+## Order and signing status
+
+Remote CA operations remain connected to CSR status and order history.
+
+The confirmed CSR workflow includes states such as **Created**, **Submitted**, **Validating**, **Signed**, **Rejected**, and **Cancelled**. Remote CA order information can also be retained with the CSR, including active and past orders.
+
+During order finalization, KryptoVault polls the CA for status. If the finalization takes longer than the configured timeout, the user is informed that processing is taking longer than usual and can return later.
+
+## Connection health monitoring
+
+Remote CA connections include health-check information so KryptoVault can track whether a configured CA connection is currently operational.
+
+<CardGroup cols={2}>
+  <Card title="Health Status" icon="heart-pulse">
+    Tracks whether the Remote CA connection is healthy, unhealthy, or has not yet been checked.
+  </Card>
+
+  <Card title="Connection History" icon="clock-rotate-left">
+    Maintains information about the latest health check, successful connection, failed connection, and associated connection error.
+  </Card>
+</CardGroup>
+
+Automatic health checks can be enabled for the Remote CA connection.
+
+## Sensitive connection data
+
+Remote CA tokens and connection parameters are treated as sensitive information.
+
+<Warning>
+  Sensitive Remote CA credentials and connection parameters are masked in the user interface and should remain protected throughout storage and processing.
+</Warning>
+
+## Relationship with Remote DNS
+
+Remote CA and Remote DNS work together in certificate flows that require DNS validation.
+
+The relationship can be represented as:
+
+**CSR → Remote CA Order → DNS Challenge → Remote DNS → Push Record → Validate → Finalise Order → Signed Certificate**
+
+Remote CA manages the external CA interaction, while Remote DNS handles the DNS-side validation required by the applicable challenge.
+
+## Governance and traceability
+
+Remote CA configuration and certificate operations follow KryptoVault's existing role and permission model.
+
+KryptoVault maintains operational context around Remote CA connections, CSR orders, signing outcomes, synchronization, renewal activity, and connection health so certificate-management teams can trace how certificates interact with external CA environments.
