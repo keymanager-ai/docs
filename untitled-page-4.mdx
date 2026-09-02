@@ -1,3 +1,100 @@
 ---
-title: "Monitoring"
+title: "Monitoring "
 ---
+
+KryptoVault **Monitoring** provides calendar-based visibility into upcoming certificate expirations.
+
+It helps certificate-management teams understand which certificates are approaching expiry and when action may be required, using a time-oriented view instead of relying only on inventory listings.
+
+<Info>
+  Monitoring focuses on certificate expiry visibility. Certificates are organized by their expiration date so teams can review upcoming expirations in a calendar context.
+</Info>
+
+## Expiry calendar
+
+The Monitoring section presents certificate expiration information through a calendar-style view.
+
+Users can select a specific date and review the certificates scheduled to expire on that day.
+
+<CardGroup cols={2}>
+  <Card title="Calendar Visibility" icon="calendar-days">
+    View certificate expirations according to their scheduled expiry dates.
+  </Card>
+
+  <Card title="Daily Certificate View" icon="calendar-check">
+    Select a day to see the certificates expiring on that date.
+  </Card>
+</CardGroup>
+
+This gives operations and PKI teams a time-based view of certificate lifecycle risk.
+
+## Certificate expiry monitoring
+
+Each certificate has a defined validity period, including its **Not Before** and **Not After** dates.
+
+KryptoVault uses certificate expiration information to place certificates within the Monitoring calendar and make upcoming expirations easier to identify.
+
+<Steps>
+  <Step title="Certificate is managed">
+    The certificate becomes part of KryptoVault Certificate Management.
+  </Step>
+  <Step title="Expiration date is available">
+    KryptoVault uses the certificate's validity end date as the basis for monitoring.
+  </Step>
+  <Step title="Certificate appears in the calendar">
+    The certificate is represented on the date corresponding to its expiry.
+  </Step>
+  <Step title="Review expiring certificates">
+    Selecting a date displays the certificates expiring on that day.
+  </Step>
+</Steps>
+
+## Time-based views
+
+The Monitoring calendar supports different time perspectives so teams can review certificate expirations over broader or narrower periods.
+
+<Tabs>
+  <Tab title="Day">
+    Review certificates expiring on a selected date.
+  </Tab>
+  <Tab title="Week">
+    Review certificate expirations across a weekly period.
+  </Tab>
+  <Tab title="Year">
+    Review certificate expiry distribution across a wider annual view.
+  </Tab>
+</Tabs>
+
+This allows teams to move between immediate expiry review and longer-term certificate planning.
+
+## Certificate details from monitoring
+
+Selecting a date provides basic information about the certificates expiring during that period.
+
+The Monitoring view therefore acts as an operational entry point into certificate expiry information while the full certificate record continues to be maintained in Certificate Inventory.
+
+<CardGroup cols={2}>
+  <Card title="Monitoring" icon="calendar">
+    Shows when certificates are approaching their expiry date.
+  </Card>
+
+  <Card title="Certificate Inventory" icon="certificate">
+    Maintains the full managed certificate record and certificate lifecycle information.
+  </Card>
+</CardGroup>
+
+## Operational value
+
+Certificate expiration can create application, service, and infrastructure disruption when it is not identified in advance.
+
+Monitoring gives teams a consolidated time-based view of certificate expirations so upcoming certificate lifecycle activity can be identified earlier.
+
+<Card title="Expiry Awareness" icon="triangle-exclamation">
+  Calendar-based monitoring helps teams identify periods with upcoming certificate expirations and prioritize certificate lifecycle activity.
+</Card>
+
+## Governance
+
+Monitoring follows KryptoVault's existing role and permission model.
+
+Authorized certificate-management users can access certificate expiry information according to their assigned permissions.
