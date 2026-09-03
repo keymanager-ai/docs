@@ -82,7 +82,7 @@ A discovery operation moves through several logical stages before identified cer
   </Step>
 </Steps>
 
-This creates a continuous flow from **infrastructure visibility** to **certificate governance**.
+This creates a continuous flow from **infrastructure visibility** to **certificate management**.
 
 ## Discovery Job Lifecycle
 
@@ -212,14 +212,14 @@ Blackout windows prevent discovery jobs from running during restricted operation
 
 Authorized users can be permitted to override the restriction for specific discovery activity when organizational policy allows it.
 
-### Blacklist Governance
+### Blacklist Controls
 
 KryptoVault supports centralized blacklist policies for excluding infrastructure or certificate sources from discovery.
 
 Blacklist policies can apply to areas such as domains, IP-based infrastructure, ports, and certificate issuers.
 
 <Warning>
-  Blacklist controls provide a governance boundary for discovery. Overrides should be restricted to trusted administrative roles.
+  Blacklist controls define exclusions for discovery. Overrides should be restricted to trusted administrative roles.
 </Warning>
 
 ### Timeout and Retry
@@ -265,14 +265,6 @@ KryptoVault connects discovery operations with certificate intelligence.
 </CardGroup>
 
 This enables organizations to understand not only **whether certificates are being discovered**, but also **the condition of the certificate estate being discovered**.
-
-## Governance and Traceability
-
-Discovery operations are governed through KryptoVault's role-based access model.
-
-Organizations can control access to sensitive discovery capabilities such as execution, configuration changes, automatic certificate onboarding, settings, and policy overrides.
-
-KryptoVault also retains operational history around discovery jobs and runs, providing traceability for configuration changes, execution activity, outcomes, and state transitions.
 
 ## How Discovery Fits into Certificate Management
 
