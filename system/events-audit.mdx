@@ -1,8 +1,101 @@
 ---
-title: "Events & audit trail"
+title: "Events & Audit Trail"
 description: "Event types, severity, and the audit trail."
 ---
 
-<Note>
-This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault **Events & Audit Trail** provides centralized visibility into platform events for auditability, security monitoring, investigation, and diagnostics.
+
+Events are organized into four event types so teams can review authentication activity, user and service activity, auditable resource changes, and system-level events from a common operational view.
+
+## Event types
+
+<CardGroup cols={2}>
+  <Card title="Auth Events" icon="shield-check">
+    Capture authentication-related activity, including action, status, MFA usage, user identity, and IP address.
+  </Card>
+
+  <Card title="Activity Events" icon="activity">
+    Capture platform activity associated with operational execution and node context.
+  </Card>
+
+  <Card title="Audit Events" icon="clipboard-list">
+    Capture auditable changes to resources, including resource identity, change type, and before/after values.
+  </Card>
+
+  <Card title="System Events" icon="server">
+    Capture system-level events with source and node context for operational monitoring and diagnostics.
+  </Card>
+</CardGroup>
+
+## Event investigation
+
+Events can be searched and filtered using common event attributes such as date range, severity, source, and actor type.
+
+Event-specific filters provide additional investigation context for each event category.
+
+<Tabs>
+  <Tab title="Auth">
+    Filter authentication events by action, status, MFA usage, and IP address.
+  </Tab>
+  <Tab title="Audit">
+    Filter audit events by resource type, resource ID, and change type.
+  </Tab>
+  <Tab title="Activity">
+    Filter activity events by node name.
+  </Tab>
+  <Tab title="System">
+    Filter system events by node name.
+  </Tab>
+</Tabs>
+
+## Event details
+
+Selecting an event opens its detailed event context.
+
+Common event information includes event code, severity, timestamp, event type, source, actor details, event message, request ID, and node information.
+
+Additional information is shown according to the event type. For example, Auth events include authentication status and IP context, while Audit events include resource and change details.
+
+## Event export
+
+Filtered event data can be exported for compliance and analysis.
+
+<CardGroup cols={3}>
+  <Card title="TXT" icon="file-lines">
+    Export the selected event view as text.
+  </Card>
+
+  <Card title="JSON" icon="brackets-curly">
+    Export the selected event view as structured JSON.
+  </Card>
+
+  <Card title="CSV" icon="file-csv">
+    Export the selected event view as CSV.
+  </Card>
+</CardGroup>
+
+Export applies to the active event type together with the selected filters, search criteria, and date range.
+
+## Event retention
+
+Retention is configured independently for Auth, Audit, Activity, and System events.
+
+The default retention period is **90 days**. Events older than the configured retention period are permanently deleted.
+
+<Warning>
+  Event retention uses permanent deletion. Soft delete is not used for retained event data.
+</Warning>
+
+## Manual event deletion
+
+Manual event deletion can be enabled or disabled from Event Settings.
+
+When deletion is enabled, permitted users can permanently delete event records after confirmation. When deletion is disabled, delete actions are hidden.
+
+## Relationship with Remote Forwarding
+
+Selected platform events can also be sent to an external Azure Queue destination through Remote Forwarding.
+
+**Platform Event → Event Store → Investigation / Export → Optional Remote Forwarding**
+
+This allows the same event model to support local investigation as well as downstream archival or monitoring.

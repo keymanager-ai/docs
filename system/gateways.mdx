@@ -1,8 +1,69 @@
 ---
-title: "Gateways"
+title: "Gateways "
 description: "Registering and testing gateway connections."
 ---
 
-<Note>
-This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault **Gateways** provides managed proxy connectivity for platform operations that need to reach infrastructure through a controlled network path.
+
+A Gateway stores the proxy configuration required for outbound connectivity and can be enabled or disabled as an operational connection object.
+
+## Gateway model
+
+Gateway configuration combines core identity, proxy connection settings, and system-managed metadata.
+
+<CardGroup cols={2}>
+  <Card title="Gateway Identity" icon="route">
+    Each Gateway has a name, category, type, and enabled state.
+  </Card>
+
+  <Card title="Proxy Configuration" icon="network-wired">
+    Proxy connectivity includes host, port, proxy type, Remote DNS behavior, and optional authentication.
+  </Card>
+</CardGroup>
+
+## Proxy connectivity
+
+Gateway proxy configuration defines how traffic is routed through the proxy endpoint.
+
+The proxy host identifies the target proxy server and the proxy port defines the connection port. Proxy ports must be between **1 and 65535**.
+
+Supported SOCKS proxy types include **SOCKS4** and **SOCKS5**.
+
+## Remote DNS
+
+Gateway configuration includes a **Remote DNS** option.
+
+When Remote DNS is enabled, DNS resolution occurs at the remote end of the proxy connection rather than being resolved locally before proxying.
+
+<Info>
+  Remote DNS in Gateway configuration is a proxy-resolution setting. It is separate from the Certificate Management Remote DNS capability used for certificate challenge validation.
+</Info>
+
+## Proxy authentication
+
+Gateway configuration can include a username and password for authenticated proxy access.
+
+The password is treated as sensitive connection information and is masked in the interface.
+
+## Gateway lifecycle
+
+<Steps>
+  <Step title="Create Gateway">
+    Define the Gateway identity and proxy connection configuration.
+  </Step>
+  <Step title="Enable connection">
+    Set the Gateway as enabled when it should be available for platform operations.
+  </Step>
+  <Step title="Update configuration">
+    Gateway connection details can be maintained as network configuration changes.
+  </Step>
+  <Step title="Delete Gateway">
+    Gateway records use a soft-delete model with deletion metadata retained by the system.
+  </Step>
+</Steps>
+
+## Gateway metadata
+
+KryptoVault maintains creation, modification, and deletion metadata for Gateway records.
+
+This provides traceability for when the Gateway was created or changed and records the user associated with those actions.
