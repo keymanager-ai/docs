@@ -3,6 +3,90 @@ title: "Roles & permissions"
 description: "RBAC across certificate, key_vault, and system targets."
 ---
 
-<Note>
-This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault **Roles & Permissions** defines what users are authorized to access and which actions they can perform across the platform.
+
+Roles connect a **Role Target**, a named Role, and its Permissions into a reusable access model that can be assigned to users.
+
+<Info>
+  The current Role Targets defined in the KeyManager requirements are **Key vault**, **Certificate**, and **Admin**.
+</Info>
+
+## Role model
+
+A Role represents a reusable permission set associated with a specific area of the platform.
+
+<CardGroup cols={3}>
+  <Card title="Key Vault" icon="vault">
+    Defines permissions associated with Key Vault and Secrets Management capabilities.
+  </Card>
+
+  <Card title="Certificate" icon="certificate">
+    Defines permissions associated with Certificate Management capabilities.
+  </Card>
+
+  <Card title="Admin" icon="user-shield">
+    Defines administrative access within the platform.
+  </Card>
+</CardGroup>
+
+## Permission hierarchy
+
+Permissions are configured through module-level and downstream action selections.
+
+Selecting or clearing a module-level permission can select or clear the related sub-module or action permissions beneath it.
+
+Examples in the requirements use permission patterns such as:
+
+- `Certificates:read`
+- `Certificates:write`
+
+This allows Roles to represent both broad module access and specific operational actions.
+
+## System and custom Roles
+
+KryptoVault distinguishes between predefined System Roles and custom Roles.
+
+<Tabs>
+  <Tab title="System Roles">
+    System Roles are predefined with full permissions and cannot be edited or deleted through the front-end Role management flow.
+  </Tab>
+  <Tab title="Custom Roles">
+    Custom Roles are created by administrators with a selected Role Target, Role Name, status, metadata, and permission set.
+  </Tab>
+</Tabs>
+
+## Role lifecycle
+
+<Steps>
+  <Step title="Select Role Target">
+    The Role is associated with Key vault, Certificate, or Admin.
+  </Step>
+  <Step title="Define Role">
+    A unique Role Name and optional descriptive metadata are provided.
+  </Step>
+  <Step title="Assign Permissions">
+    The permitted modules and actions are selected.
+  </Step>
+  <Step title="Activate Role">
+    New Roles are Active by default and can later have their status updated.
+  </Step>
+  <Step title="Assign to users">
+    The Role becomes available for user assignment within the applicable access context.
+  </Step>
+</Steps>
+
+## Assigned-role controls
+
+Role editing and deletion depend on whether the Role is already assigned to users.
+
+<Warning>
+  A Role that is assigned to a user cannot be deleted. When an assigned Role is edited, the current requirements limit editing to its Permissions.
+</Warning>
+
+This protects active user access relationships from being unintentionally removed while still allowing the effective permission set to be maintained.
+
+## Role visibility
+
+Role management provides visibility into Role identity, Role Target, permissions, assigned users, status, tags, and creation/update metadata.
+
+This gives administrators a centralized view of the access models currently available across Certificate, Key Vault, and administrative capabilities.
