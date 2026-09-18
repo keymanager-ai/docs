@@ -3,18 +3,26 @@ title: "Session management"
 description: "Session settings and token lifetimes."
 ---
 
-KryptoVault includes **Session management** as an Access Management documentation area.
+KryptoVault **Session management** provides visibility and control around authenticated user sessions.
 
-The current KeyManager requirements confirm user login, successful authentication, recent-login visibility, and logout behavior, but they do not define configurable session duration, token lifetime, concurrent-session controls, device management, or forced-session termination.
+## Login activity
 
-<Info>
-  Session-management configuration should only be documented after the corresponding product behavior and requirements are confirmed.
-</Info>
+After successful authentication, the user can access the KeyManager portal according to account status and assigned access.
 
-## Confirmed authentication session behavior
+User profile information includes recent login activity, with the latest five login records available for visibility.
 
-A successfully authenticated user is allowed into the KeyManager portal according to account status and credentials.
+## Logout
 
-Users can explicitly log out of the application. The current requirements specify a logout confirmation before returning the user to the login screen.
+Users can explicitly log out of KeyManager.
 
-User profile information also retains visibility into recent login activity, with the latest five login records referenced in the FRD.
+<Steps>
+  <Step title="Initiate logout">
+    The user selects the logout action.
+  </Step>
+  <Step title="Confirm logout">
+    KeyManager asks for confirmation before ending the session.
+  </Step>
+  <Step title="Return to login">
+    After confirmation, the user is returned to the login screen.
+  </Step>
+</Steps>

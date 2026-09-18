@@ -8,7 +8,7 @@ KryptoVault **Roles & Permissions** defines what users are authorized to access 
 Roles connect a **Role Target**, a named Role, and its Permissions into a reusable access model that can be assigned to users.
 
 <Info>
-  The current Role Targets defined in the KeyManager requirements are **Key vault**, **Certificate**, and **Admin**.
+  Available Role Targets are **Key vault**, **Certificate**, and **Admin**.
 </Info>
 
 ## Role model
@@ -35,20 +35,13 @@ Permissions are configured through module-level and downstream action selections
 
 Selecting or clearing a module-level permission can select or clear the related sub-module or action permissions beneath it.
 
-Examples in the requirements use permission patterns such as:
-
-- `Certificates:read`
-- `Certificates:write`
-
 This allows Roles to represent both broad module access and specific operational actions.
 
 ## System and custom Roles
 
-KryptoVault distinguishes between predefined System Roles and custom Roles.
-
 <Tabs>
   <Tab title="System Roles">
-    System Roles are predefined with full permissions and cannot be edited or deleted through the front-end Role management flow.
+    System Roles are predefined with full permissions and cannot be edited or deleted through the Role management flow.
   </Tab>
   <Tab title="Custom Roles">
     Custom Roles are created by administrators with a selected Role Target, Role Name, status, metadata, and permission set.
@@ -77,16 +70,10 @@ KryptoVault distinguishes between predefined System Roles and custom Roles.
 
 ## Assigned-role controls
 
-Role editing and deletion depend on whether the Role is already assigned to users.
-
 <Warning>
-  A Role that is assigned to a user cannot be deleted. When an assigned Role is edited, the current requirements limit editing to its Permissions.
+  A Role that is assigned to a user cannot be deleted. When an assigned Role is edited, only its Permissions can be changed.
 </Warning>
-
-This protects active user access relationships from being unintentionally removed while still allowing the effective permission set to be maintained.
 
 ## Role visibility
 
 Role management provides visibility into Role identity, Role Target, permissions, assigned users, status, tags, and creation/update metadata.
-
-This gives administrators a centralized view of the access models currently available across Certificate, Key Vault, and administrative capabilities.

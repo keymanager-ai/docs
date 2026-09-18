@@ -5,10 +5,10 @@ description: "Creating and managing user accounts."
 
 KryptoVault **Users** provides centralized management of user accounts that can access the KeyManager platform.
 
-The current requirements define two user types: **Interactive** and **Service**. Both are created and managed by administrators, with role assignment, account status, authentication behavior, and profile information maintained as part of the user record.
+KryptoVault supports two user types: **Interactive** and **Service**. Both are created and managed by administrators, with role assignment, account status, authentication behavior, and profile information maintained as part of the user record.
 
 <Info>
-  User access is controlled through assigned Roles and the account's active or blocked status.
+  User access is controlled through assigned Roles and the account's Active or Blocked status.
 </Info>
 
 ## User types
@@ -32,13 +32,13 @@ User creation connects identity, authentication, and authorization in one flow.
     The administrator creates either an Interactive or Service user.
   </Step>
   <Step title="Create account identity">
-    The user is created with its profile and unique username information.
+    The user is created with profile information and a unique username.
   </Step>
   <Step title="Assign role access">
     One or more applicable Roles are assigned according to the user's access requirements.
   </Step>
   <Step title="Configure authentication">
-    The account is configured with its local password behavior and, for Interactive users, optional SSO access.
+    The account is configured with local password behavior and, for Interactive users, optional SSO access.
   </Step>
   <Step title="Activate account">
     New users are created as Active by default and can later be changed to Blocked.
@@ -51,19 +51,15 @@ Interactive users are intended for people who sign in to the KeyManager portal.
 
 An Interactive user can be associated with multiple Roles. Role selection is based on the Roles configured in the platform, allowing one user to receive access across the applicable Role Targets.
 
-When **Allow SSO** is enabled for the user, that user can authenticate using SSO in addition to the supported local login flow.
+When **Allow SSO** is enabled, the user can authenticate using SSO in addition to local login.
 
 ## Service user access
 
 Service users are managed separately from Interactive users.
 
-The current requirements define Service users as locally authenticated accounts with their own role target, role name, password, tags, status, and descriptive information.
-
-This provides a distinct account type for operational or service-oriented access without treating the account as a normal Interactive user.
+They use local authentication and maintain their own Role Target, Role Name, password, tags, status, and descriptive information.
 
 ## Account status
-
-User status controls whether the account can access the platform.
 
 <Tabs>
   <Tab title="Active">
@@ -76,12 +72,12 @@ User status controls whether the account can access the platform.
 
 ## First-login password setup
 
-During user creation, administrators can require the user to set a new password after successful login.
+Administrators can require a user to set a new password after the first successful login.
 
 When this option is enabled, the user is taken through the Set Password flow before continuing into the application.
 
 <Card title="Password Reset on First Login" icon="key">
-  Administrators can require a newly created account to establish its own password after the first successful authentication.
+  A newly created account can be required to establish its own password after first login.
 </Card>
 
 ## User profile and access visibility
@@ -94,4 +90,4 @@ The user profile also exposes the assigned Role Target, Role Name, and Permissio
 
 Administrators can create, view, update, and manage user status through the Users capability.
 
-User updates can include profile information, Role assignment, password-related settings, tags, and account status, while user access remains connected to the permissions provided by the assigned Roles.
+User updates can include profile information, Role assignment, password-related settings, tags, and account status.
