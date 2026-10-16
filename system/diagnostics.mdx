@@ -1,0 +1,194 @@
+---
+title: "Diagnostics"
+---
+
+KryptoVault **Diagnostics** provides administrators and support teams with a consolidated view of platform health, system capacity, configuration, and background processing.
+
+It combines health checks, platform metrics, worker controls, version information, and support utilities in one operational area.
+
+<Info>
+  Diagnostics is intended for operational monitoring, troubleshooting, and support activities.
+</Info>
+
+## Diagnostics capabilities
+
+<CardGroup cols={2}>
+  <Card title="License & Version" icon="badge-check">
+    Review installation license information and compare running application versions with the latest released versions.
+  </Card>
+
+  <Card title="System Metrics" icon="chart-line">
+    View a summarized count of certificates, vaults, secrets, issuers, users, roles, discovery jobs, certificate stores, and CSRs.
+  </Card>
+
+  <Card title="Health Checks" icon="heart-pulse">
+    Check the availability and responsiveness of the platform database, cache, and background worker.
+  </Card>
+
+  <Card title="Worker Management" icon="gears">
+    Review recurring tasks, run supported tasks on demand, and clear selected worker queues when required.
+  </Card>
+</CardGroup>
+
+## License and version visibility
+
+Diagnostics provides installation and application-version information in one view.
+
+License information includes customer, license type, license status, and validity.
+
+Application versions are compared against the latest released versions so support teams can identify whether the running installation is aligned with the latest available release.
+
+The same view also indicates whether error monitoring is enabled.
+
+<Card title="Refresh License Information" icon="rotate">
+  License and version information can be refreshed when fresh data is required. Refresh activity is recorded in the audit trail.
+</Card>
+
+## System metrics
+
+System Metrics gives a high-level inventory of the objects managed by KryptoVault.
+
+<CardGroup cols={3}>
+  <Card title="Certificates" icon="certificate">
+    Shows certificate totals including valid, expired, discovered, generated, and enrolled certificates.
+  </Card>
+
+  <Card title="Secrets Management" icon="vault">
+    Shows counts for Key Vaults, Secrets, and Protection Keys.
+  </Card>
+
+  <Card title="Issuers" icon="building-columns">
+    Shows public, private, and remote issuer counts.
+  </Card>
+
+  <Card title="Access Management" icon="users">
+    Shows counts for users, service accounts, and roles.
+  </Card>
+
+  <Card title="Discovery" icon="radar">
+    Shows the number of Discovery Jobs managed by the platform.
+  </Card>
+
+  <Card title="Certificate Operations" icon="file-signature">
+    Shows Certificate Store and Certificate Signing Request counts.
+  </Card>
+</CardGroup>
+
+Deleted records are excluded from these totals.
+
+## System settings visibility
+
+Diagnostics provides a read-only view of the configuration the platform is running with.
+
+The view can include:
+
+- Application settings
+- Feature switches
+- Error-monitoring configuration
+- License-service connectivity
+- Background-worker settings
+- Network and proxy settings
+
+This gives support teams a consolidated configuration reference when investigating platform behavior.
+
+## Database health
+
+KryptoVault checks the two data stores used by the platform:
+
+<CardGroup cols={2}>
+  <Card title="Main Database" icon="database">
+    Reports availability, version, size, usage, and response time.
+  </Card>
+
+  <Card title="Cache" icon="memory">
+    Reports cache availability, version, size, usage, and response time.
+  </Card>
+</CardGroup>
+
+A store is reported as **Healthy** when it responds within five seconds and **Degraded** when the response takes longer.
+
+## Background worker health
+
+The background worker health check verifies that the worker can receive and process a test job.
+
+<Steps>
+  <Step title="Send test job">
+    KryptoVault submits a lightweight test job to the background worker.
+  </Step>
+  <Step title="Wait for response">
+    The platform waits up to three seconds for the worker to respond.
+  </Step>
+  <Step title="Report worker health">
+    The worker is reported as Healthy or Degraded based on the result.
+  </Step>
+</Steps>
+
+The health view also includes the number of:
+
+- Jobs waiting to run
+- Jobs scheduled for later
+- Registered recurring jobs
+
+## Worker task management
+
+Administrators with the applicable worker-management permission can clear queued background tasks.
+
+<Tabs>
+  <Tab title="All Tasks">
+    Clears both waiting and scheduled worker tasks.
+  </Tab>
+  <Tab title="Waiting">
+    Clears jobs that are waiting to run.
+  </Tab>
+  <Tab title="Scheduled">
+    Clears jobs scheduled for later execution.
+  </Tab>
+</Tabs>
+
+<Warning>
+  Clearing worker tasks changes the background-processing queue. Each use is recorded in the audit trail.
+</Warning>
+
+## Recurring tasks
+
+Diagnostics provides visibility into recurring background jobs that are available for operational management.
+
+Each recurring task includes a friendly name, a description of its purpose, and its running status.
+
+Internal housekeeping tasks are excluded from this view.
+
+## Run a recurring task
+
+Supported recurring tasks can be started immediately instead of waiting for their next scheduled execution.
+
+<Steps>
+  <Step title="Select task">
+    Choose a recurring task available in the Diagnostics recurring-task list.
+  </Step>
+  <Step title="Run now">
+    Start the task manually.
+  </Step>
+  <Step title="Queue execution">
+    The task is added to the background-processing queue.
+  </Step>
+</Steps>
+
+The audit trail records who started the task and when it was started.
+
+## Ping
+
+The Ping capability provides a lightweight platform-availability check.
+
+<Card title="Service Availability" icon="signal">
+  Ping confirms that the service is responding and returns the IP address from which the request reached the platform.
+</Card>
+
+This makes it suitable for basic service monitoring and connectivity checks.
+
+## Report a bug
+
+Signed-in users can send bug reports or product feedback to the vendor support service directly from KryptoVault.
+
+The installation license key is attached automatically so the report can be associated with the correct customer environment.
+
+If the support service cannot be reached, the user is informed that the report could not be submitted.
