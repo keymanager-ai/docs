@@ -1,8 +1,74 @@
 ---
-title: "Remote forwarding"
+title: "Remote Forwarding"
 description: "Forward events to webhook, syslog, or Azure Queue."
 ---
 
-<Note>
-This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault **Remote Forwarding** sends selected platform events to an external **Azure Queue Storage** destination for archival, monitoring, or downstream processing.
+
+Each configured destination operates as an independent event-forwarding pipeline.
+
+<Info>
+  Remote Forwarding works with the same Auth, Activity, Audit, and System event types maintained by Events & Audit Trail.
+</Info>
+
+## Forwarding destinations
+
+Remote Forwarding supports destination management for Azure Queue connections.
+
+<Steps>
+  <Step title="Create destination">
+    A destination is created with a unique name and Azure Queue configuration.
+  </Step>
+  <Step title="Select event scope">
+    One or more event types are selected for forwarding.
+  </Step>
+  <Step title="Enable forwarding">
+    The destination is enabled when event delivery should be active.
+  </Step>
+  <Step title="Forward matching events">
+    Only events belonging to the selected scopes are sent through that destination.
+  </Step>
+</Steps>
+
+## Event scope
+
+Each destination defines which event categories should be forwarded.
+
+<CardGroup cols={2}>
+  <Card title="Auth & Activity" icon="activity">
+    Forward authentication and platform activity events when selected.
+  </Card>
+
+  <Card title="Audit & System" icon="server">
+    Forward auditable resource changes and system events when selected.
+  </Card>
+</CardGroup>
+
+At least one event scope must be selected. Changes to the selected scope take effect after the destination is saved.
+
+## Destination state
+
+A destination can be enabled or disabled independently.
+
+<Tabs>
+  <Tab title="Enabled">
+    Matching events are eligible for forwarding to the configured Azure Queue destination.
+  </Tab>
+  <Tab title="Disabled">
+    Forwarding through that destination is inactive.
+  </Tab>
+</Tabs>
+
+## Delivery handling
+
+Remote Forwarding includes retry handling for failed forwarding attempts.
+
+This keeps transient delivery failures within the forwarding process instead of treating the first unsuccessful attempt as the final delivery outcome.
+
+## Relationship with Events
+
+Remote Forwarding extends the Events capability without replacing local event storage and investigation.
+
+**Event Generated → Stored in KryptoVault → Scope Evaluated → Azure Queue Forwarding**
+
+This allows events to remain available inside KryptoVault while selected event categories are also delivered to the configured external destination.

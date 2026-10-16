@@ -1,8 +1,177 @@
 ---
 title: "Recycle bin"
-description: "Soft-delete, restore, and retention settings."
 ---
 
-<Note>
-This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault **Recycle Bin** provides a controlled recovery layer for supported items that are deleted from the platform.
+
+Instead of removing eligible records immediately, KryptoVault moves them to the Recycle Bin where authorized users can review, restore, or permanently delete them. This creates a safer deletion process while preserving the option to recover items that were removed by mistake.
+
+<Info>
+  Deleted items remain in the Recycle Bin until they are restored, permanently deleted, or removed automatically through the configured retention policy.
+</Info>
+
+## Supported items
+
+The Recycle Bin supports multiple resource types across Certificate Management, Secrets Management, and Access Management.
+
+<CardGroup cols={2}>
+  <Card title="Certificates & CSRs" icon="certificate">
+    Supports discovered certificates and Certificate Signing Requests, subject to their deletion rules.
+  </Card>
+
+  <Card title="Issuers" icon="building-columns">
+    Supports private issuers. Removing a private issuer can trigger certificate revalidation because trust relationships may change.
+  </Card>
+
+  <Card title="Vaults & Secrets" icon="vault">
+    Supports complete Vaults, individual Secrets, and Protection Keys that are no longer in use by a Vault.
+  </Card>
+
+  <Card title="Users & Service Accounts" icon="users">
+    Supports deleted user and service-account records, with active sessions revoked as part of deletion.
+  </Card>
+</CardGroup>
+
+## Recycle Bin visibility
+
+The Recycle Bin provides a consolidated view of deleted resources.
+
+Users can review all deleted items together or narrow the view by resource type. Deleted records can also be searched and filtered using deletion context such as the user who performed the deletion and the deletion date.
+
+<CardGroup cols={2}>
+  <Card title="Category View" icon="layer-group">
+    Shows the supported item types together with the number of deleted items in each category.
+  </Card>
+
+  <Card title="Deletion Context" icon="clock-rotate-left">
+    Shows the item name, resource type, deletion time, and the user who deleted the record.
+  </Card>
+</CardGroup>
+
+Secrets are counted in category totals only while their parent Vault remains active.
+
+## Restore
+
+Authorized users can restore deleted resources from the Recycle Bin.
+
+<Steps>
+  <Step title="Select resource type">
+    Choose the type of item that should be restored.
+  </Step>
+  <Step title="Select items">
+    Restore specific deleted records or restore all deleted records of the selected type.
+  </Step>
+  <Step title="Restore resource">
+    KryptoVault returns the selected item to normal use with its previous state.
+  </Step>
+  <Step title="Record activity">
+    The restore operation is captured in the activity log.
+  </Step>
+</Steps>
+
+A restored Service Account becomes active again.
+
+<Info>
+  When no individual records are selected, the restore operation applies to every deleted item of the selected resource type.
+</Info>
+
+## Permanent deletion
+
+Items in the Recycle Bin can also be permanently removed.
+
+Permanent deletion is irreversible and removes the selected resource from the platform.
+
+<Warning>
+  Once an item is permanently deleted from the Recycle Bin, it cannot be restored.
+</Warning>
+
+Users can permanently delete selected items or all items within a selected resource type. Each permanent deletion is recorded in the audit log.
+
+## Relationship cleanup
+
+Permanent deletion also removes or detaches relationships that would otherwise reference the deleted resource.
+
+<AccordionGroup>
+  <Accordion title="Certificates">
+    Linked CSRs, renewal requests, and renewal references are detached from the certificate.
+  </Accordion>
+
+  <Accordion title="CSRs">
+    Linked Self Service requests are detached from the CSR.
+  </Accordion>
+
+  <Accordion title="Users and Service Accounts">
+    Account references are removed from Vault access lists, certificate ownership, CSR ownership, and Certificate Store ownership.
+
+    User records are also removed from the break-glass list and MFA exemption list.
+  </Accordion>
+
+  <Accordion title="Secrets">
+    Permanently deleted Secrets are removed from their Vault relationship.
+  </Accordion>
+</AccordionGroup>
+
+This cleanup prevents retained resources from keeping invalid references to records that no longer exist.
+
+## Automatic cleanup
+
+KryptoVault can automatically remove Recycle Bin items after a configured retention period.
+
+Administrators can enable automatic cleanup and define how many days deleted items should remain recoverable.
+
+<CardGroup cols={2}>
+  <Card title="Retention Period" icon="calendar-clock">
+    Defines how long deleted items remain in the Recycle Bin before permanent removal.
+  </Card>
+
+  <Card title="Automatic Cleanup" icon="trash-clock">
+    Permanently removes items that have remained in the Recycle Bin longer than the configured retention period.
+  </Card>
+</CardGroup>
+
+When automatic cleanup is enabled and the settings are saved, KryptoVault immediately evaluates the Recycle Bin against the configured retention period.
+
+Configuration changes are recorded in the audit log.
+
+## Scheduled cleanup
+
+A scheduled cleanup runs once per day when automatic cleanup is enabled.
+
+<Steps>
+  <Step title="Evaluate deleted items">
+    KryptoVault checks how long each item has remained in the Recycle Bin.
+  </Step>
+  <Step title="Apply retention policy">
+    Items older than the configured retention period are selected for permanent removal.
+  </Step>
+  <Step title="Clean related references">
+    The same relationship cleanup used during manual permanent deletion is applied.
+  </Step>
+  <Step title="Record summary">
+    The audit log records the total number of items removed and the count by resource type.
+  </Step>
+</Steps>
+
+If the scheduled cleanup fails, KryptoVault raises a system event.
+
+## Access control
+
+Recycle Bin capabilities are separated into dedicated permissions.
+
+<CardGroup cols={2}>
+  <Card title="View" icon="eye">
+    Allows users to view deleted resources and category information.
+  </Card>
+
+  <Card title="Restore" icon="rotate-left">
+    Allows users to restore deleted resources.
+  </Card>
+
+  <Card title="Delete" icon="trash">
+    Allows users to permanently remove items from the Recycle Bin.
+  </Card>
+
+  <Card title="Manage Settings" icon="sliders">
+    Allows users to view and maintain automatic cleanup settings.
+  </Card>
+</CardGroup>

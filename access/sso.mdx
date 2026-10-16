@@ -1,8 +1,153 @@
 ---
-title: "Single sign-on"
-description: "SSO protocols and configuration."
+title: "SSO"
 ---
 
-<Note>
-This page is a scaffold stub. Content coming soon.
-</Note>
+KryptoVault **Single Sign-On (SSO)** allows users to access the platform using their existing organizational identity instead of relying only on a locally stored password.
+
+It connects KryptoVault with supported identity providers and brings external authentication, platform access, MFA, and session creation into a unified sign-in experience.
+
+<Info>
+  Supported identity providers are **Google**, **Microsoft Entra**, and **LDAP**.
+</Info>
+
+## Supported identity providers
+
+<CardGroup cols={3}>
+  <Card title="Google" icon="google">
+    Allows users to authenticate through a configured Google identity provider.
+  </Card>
+
+  <Card title="Microsoft Entra" icon="microsoft">
+    Allows users to authenticate through Microsoft Entra using the configured tenant and application connection.
+  </Card>
+
+  <Card title="LDAP" icon="address-book">
+    Allows users to authenticate against an organizational LDAP directory.
+  </Card>
+</CardGroup>
+
+Only one provider is selected as the active SSO provider for platform sign-in at a time.
+
+## Platform-wide SSO
+
+SSO can be enabled or disabled centrally.
+
+When SSO is enabled, the active provider determines the external identity service used during authentication. Administrators can also control the login-button name and whether SSO is enforced across users.
+
+When the active provider is cleared, SSO and SSO enforcement are disabled and users return to local authentication.
+
+## Provider configuration
+
+Each SSO provider maintains its own connection configuration.
+
+<Tabs>
+  <Tab title="Google">
+    Google configuration includes the application client information, redirect address, sign-in and token endpoints, and optional allowed email domains.
+  </Tab>
+  <Tab title="Microsoft Entra">
+    Microsoft Entra uses application client information together with the tenant ID, redirect address, sign-in and token endpoints, and optional allowed email domains.
+  </Tab>
+  <Tab title="LDAP">
+    LDAP configuration includes the directory server, port, secure-connection option, service account, search base, and user-search filter.
+  </Tab>
+</Tabs>
+
+Provider configuration is isolated so only settings applicable to the selected provider are used.
+
+## Sign-in experience
+
+KryptoVault determines which sign-in methods are available after the user enters their email address or username.
+
+Depending on the account and authentication policy, the user can be offered:
+
+<CardGroup cols={2}>
+  <Card title="SSO" icon="right-to-bracket">
+    Authenticate through the configured organizational identity provider.
+  </Card>
+
+  <Card title="Local Sign-In" icon="key">
+    Authenticate using the local KryptoVault password when local access is available.
+  </Card>
+</CardGroup>
+
+When SSO is enforced, only SSO is offered, except for designated **break-glass users**, who retain local sign-in access.
+
+Inactive users are not offered a sign-in method.
+
+## Google and Microsoft sign-in
+
+Google and Microsoft Entra use an external-provider authentication flow.
+
+<Steps>
+  <Step title="Start sign-in">
+    The user selects the SSO option and is redirected to the active provider.
+  </Step>
+  <Step title="Authenticate with provider">
+    The user completes authentication with Google or Microsoft Entra.
+  </Step>
+  <Step title="Return to KryptoVault">
+    The provider returns the user to KryptoVault after successful authentication.
+  </Step>
+  <Step title="Validate sign-in response">
+    KryptoVault verifies that the returned authentication response belongs to a sign-in initiated by the platform.
+  </Step>
+  <Step title="Apply access checks">
+    Any configured email-domain restrictions and platform access controls are evaluated before access continues.
+  </Step>
+</Steps>
+
+The sign-in proof is single-use and expires after a limited period, with a default lifetime of ten minutes.
+
+## LDAP sign-in
+
+LDAP authentication follows a directory-based flow.
+
+The user enters their directory username and password directly in KryptoVault, and the credentials are validated against the configured organizational directory.
+
+## Email-domain restrictions
+
+Google and Microsoft Entra configurations can optionally restrict SSO access to approved email domains.
+
+When domain restrictions are configured, the authenticated user's email domain must match the permitted domain list before authentication can continue.
+
+## IP-based access restrictions
+
+SSO can also operate with platform IP restrictions.
+
+When IP restriction is enabled and applied to SSO users, authentication succeeds only from permitted IP addresses.
+
+## SSO and MFA
+
+SSO works together with KryptoVault Multi-Factor Authentication.
+
+After the external identity provider successfully verifies the user, KryptoVault applies the applicable MFA policy.
+
+<CardGroup cols={2}>
+  <Card title="Mandatory MFA" icon="shield-check">
+    The user receives only temporary access until MFA verification is completed.
+  </Card>
+
+  <Card title="Optional MFA" icon="mobile-screen-button">
+    The user is signed in and can be invited to enroll in MFA.
+  </Card>
+</CardGroup>
+
+This keeps external identity verification and KryptoVault MFA as separate layers of the authentication process.
+
+## Session and permissions
+
+After authentication, access checks, and MFA are successfully completed, KryptoVault creates the user session.
+
+The session carries the permissions provided by the user's assigned Role.
+
+**Identity Provider → Access Checks → MFA → User Session → Role Permissions**
+
+Successful SSO login is recorded in the audit trail, and a successful-login email can be sent when that notification is enabled.
+
+## Provider administration
+
+Administrators can review whether each provider has been configured and manage saved provider settings.
+
+A configured provider can also be reset, except when that provider is the active SSO provider.
+
+Reset operations and changes to active-provider configuration are recorded in the audit trail.

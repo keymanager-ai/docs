@@ -1,8 +1,186 @@
 ---
 title: "Notifications"
-description: "Email configuration and notification policies."
 ---
 
+KryptoVault **Notifications** centralizes platform email delivery, event-based alerts, built-in system emails, and certificate expiry reminders.
+
+It gives administrators a single place to control when emails are sent, who receives them, and which delivery provider is used.
+
+<Info>
+  Email delivery depends on the platform-wide email setting and an active delivery provider. When email is switched off, no email is sent.
+</Info>
+
+## Notification capabilities
+
+<CardGroup cols={2}>
+  <Card title="Event Alert Policies" icon="bell">
+    Send email alerts to selected recipients when eligible authentication, activity, system, or audit events occur.
+  </Card>
+
+  <Card title="Email Delivery" icon="envelope">
+    Configure and activate the provider used for outgoing platform email.
+  </Card>
+
+  <Card title="System Emails" icon="paper-plane">
+    Control standard emails such as password reset, welcome, account lock, successful login, MFA, and certificate renewal reminders.
+  </Card>
+
+  <Card title="Certificate Expiry Reminders" icon="certificate">
+    Notify certificate-store owners and configured recipients about certificate expiry through email or webhook delivery.
+  </Card>
+</CardGroup>
+
+## Event alert policies
+
+Event Alert Policies connect eligible platform events with email recipients.
+
+Events are organized into four categories:
+
+- Authentication
+- Activity
+- System
+- Audit
+
+A policy can be created for an eligible event within its category and can be enabled or disabled independently.
+
+<Steps>
+  <Step title="Select an eligible event">
+    Choose the event that should generate an email alert.
+  </Step>
+  <Step title="Define recipients">
+    Add the email recipients who should receive the notification.
+  </Step>
+  <Step title="Enable the policy">
+    Keep the policy enabled when the event should trigger outgoing email.
+  </Step>
+  <Step title="Send alert">
+    When the event occurs, KryptoVault sends the alert if email delivery is available and the policy is enabled.
+  </Step>
+</Steps>
+
+Shared CC and BCC addresses configured in email preferences are also applied to event alert emails.
+
+## Policy visibility
+
+Alert policies are grouped by event category and can be reviewed by status and event type.
+
+Each policy retains its name, description, status, event context, and recipient list.
+
+<Card title="Policy Status" icon="toggle-on">
+  Disabling a policy stops email delivery for that event without removing the policy configuration.
+</Card>
+
+Policy creation, updates, status changes, and deletion are recorded in the audit trail.
+
+## Email delivery
+
+KryptoVault supports multiple email delivery providers.
+
+<Tabs>
+  <Tab title="SMTP">
+    Supports SMTP-based email delivery, including secure connection options. TLS and SSL cannot both be enabled at the same time.
+  </Tab>
+  <Tab title="Azure Communication Services">
+    Supports outgoing email through Azure Communication Services.
+  </Tab>
+  <Tab title="AWS SES">
+    Supports outgoing email through Amazon Simple Email Service.
+  </Tab>
+</Tabs>
+
+One configured provider is active at a time and is used for outgoing platform email.
+
+## Provider validation
+
+Administrators can test a delivery provider before making it active.
+
+A test sends a real email using the selected provider and can use either saved configuration or unsaved values being evaluated.
+
+<Steps>
+  <Step title="Select provider">
+    Choose the email provider to test.
+  </Step>
+  <Step title="Provide sender and recipient">
+    A sender address and at least one recipient are required.
+  </Step>
+  <Step title="Send test email">
+    KryptoVault attempts delivery using the supplied provider configuration.
+  </Step>
+  <Step title="Review result">
+    The successful or failed test outcome is recorded in the audit trail.
+  </Step>
+</Steps>
+
+## Active provider
+
+Activating a provider makes it the delivery provider for outgoing platform email and switches email delivery on.
+
+The provider must have its required connection details configured and a sender address available in email preferences.
+
+Deactivating the active provider switches email delivery off until another provider is activated.
+
+## Email preferences
+
+Email preferences define the shared settings applied to outgoing mail.
+
+<CardGroup cols={2}>
+  <Card title="Sender & Subject" icon="at">
+    Define the sender address and an optional subject prefix used by platform emails.
+  </Card>
+
+  <Card title="Shared Recipients" icon="users">
+    Configure shared CC and BCC addresses that are included in applicable notification emails.
+  </Card>
+</CardGroup>
+
+Email preferences also control which built-in system emails are enabled.
+
+## Built-in system emails
+
+KryptoVault includes standard platform emails that operate independently from event alert policies.
+
+These include:
+
+- Password reset
+- Welcome email for new users
+- Account locked
+- Successful login
+- MFA enabled or disabled
+- Certificate renewal reminder
+
+Each system email can be enabled or disabled independently.
+
 <Note>
-This page is a scaffold stub. Content coming soon.
+  Built-in system emails are sent only when email delivery is available and the specific system email is enabled.
 </Note>
+
+## Certificate expiry reminders
+
+Certificate Stores can use scheduled expiry notifications to alert owners and additional recipients about certificate expiry.
+
+A daily job checks stores with expiry notifications enabled and evaluates certificates against the reminder and follow-up days configured for that store.
+
+By default:
+
+- Reminder: **7 days before expiry**
+- Follow-up: **30 days after expiry**
+
+Both values are configured per Certificate Store.
+
+## Expiry notification delivery
+
+Matching certificates for a Certificate Store are combined into a single report.
+
+<CardGroup cols={2}>
+  <Card title="Email" icon="envelope">
+    Sends the report to active store owners and any additional configured email recipients. The certificate renewal reminder email must be enabled.
+  </Card>
+
+  <Card title="Webhook" icon="webhook">
+    Posts the report to the webhook configured for the Certificate Store, with optional custom headers.
+  </Card>
+</CardGroup>
+
+Webhook delivery operates independently from the platform email switch.
+
+A store is skipped when there are no matching certificates or no applicable recipients. If webhook delivery fails for one store, processing continues for the remaining stores.
