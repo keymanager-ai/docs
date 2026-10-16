@@ -39,6 +39,7 @@
             "group": "Certificate Management",
             "pages": [
               "certificates/overview",
+              "untitled-page-5",
               "certificates/discovery",
               "certificates/certificate-stores",
               "certificates/inventory-private-keys",
